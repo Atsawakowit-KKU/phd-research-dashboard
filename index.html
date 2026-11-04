@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ph.D. Research Dashboard | Responsive Fit Table</title>
+  <title>Ph.D. Research Dashboard | Highlight Best Model Sync</title>
   
   <!-- Tailwind CSS Engine -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -78,6 +78,11 @@
       border-bottom: 2px solid #6366f1 !important;
       color: #818cf8 !important;
     }
+    .best-model-row {
+      background-color: rgba(6, 78, 59, 0.4) !important;
+      border-left: 4px solid #10b981 !important;
+      font-weight: 600 !important;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
@@ -98,10 +103,10 @@
                   Ph.D. Research Dashboard
                 </h1>
                 <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
-                  Real-Time Database Sync (1 min)
+                  4-Sheet Real-Time Sync
                 </span>
               </div>
-              <p class="text-xs text-slate-400">Atsawakowit Puengsuk • Meteorology-Informed Deep Learning (MI-DL)</p>
+              <p class="text-xs text-slate-400">Meteorology-Informed Deep Learning (MI-DL) • Best Model Highlighter</p>
             </div>
           </div>
         </div>
@@ -136,7 +141,7 @@
     <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800 text-xs flex items-center justify-between">
       <div class="flex items-center space-x-2">
         <span class="text-indigo-400 font-bold"><i class="fa-solid fa-database mr-1"></i> แหล่งข้อมูล:</span>
-        <span class="text-slate-200 font-medium">เชื่อมต่อ Database สดผ่าน Published CSV (แท็บ: data-preparation, KKU-AELT-score, MI-DL-Tasks, MI-DL-Model-Evaluation)</span>
+        <span class="text-slate-200 font-medium">เชื่อมต่อ 4 ชีตหลัก: data-preparation, KKU-AELT-score, MI-DL-Tasks, MI-DL-Model-Evaluation</span>
       </div>
     </div>
 
@@ -162,14 +167,36 @@
       </div>
     </div>
 
-    <!-- ================= 4 EXECUTIVE KPI SUMMARY CARDS ================= -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- ================= EXECUTIVE KPI SUMMARY CARDS (5 Cards) ================= -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
       
+      <!-- Card 0: Overall Research Progress -->
+      <div class="glass-card p-5 relative overflow-hidden border-indigo-500/30 bg-gradient-to-br from-indigo-950/40 to-slate-900/80">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-semibold text-indigo-300 uppercase tracking-wider">ความคืบหน้ารวมงานวิจัย</p>
+            <h3 class="text-2xl font-bold text-white mt-1" id="kpiOverallResearchProg">0.0%</h3>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-lg flex-shrink-0">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+            <div id="kpiOverallResearchBar" class="bg-indigo-500 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
+          </div>
+          <p class="text-xs text-slate-400 mt-2 flex justify-between">
+            <span>สถานะภาพรวม</span>
+            <span class="text-indigo-300 font-semibold">ภาพรวมดุษฎีนิพนธ์</span>
+          </p>
+        </div>
+      </div>
+
       <!-- Card 1: Data Prep Progress -->
       <div class="glass-card p-5 relative overflow-hidden">
         <div class="flex justify-between items-start">
           <div>
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">งานเตรียมข้อมูล (Sheet 1)</p>
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">งานเตรียมข้อมูล</p>
             <h3 class="text-2xl font-bold text-white mt-1" id="kpiDataPrepProg">0.0%</h3>
           </div>
           <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-lg flex-shrink-0">
@@ -181,8 +208,8 @@
             <div id="kpiDataPrepBar" class="bg-cyan-400 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
           </div>
           <p class="text-xs text-slate-400 mt-2 flex justify-between">
-            <span>เสร็จสิ้น: <strong class="text-emerald-400" id="kpiDataDone">0</strong> / <span id="kpiDataTotal">0</span> งาน</span>
-            <span class="text-slate-400" id="kpiDataInProgress">กำลังทำ 0</span>
+            <span>เสร็จ: <strong class="text-emerald-400" id="kpiDataDone">0</strong> / <span id="kpiDataTotal">0</span></span>
+            <span class="text-slate-400" id="kpiDataInProgress">ทำ 0</span>
           </p>
         </div>
       </div>
@@ -191,8 +218,8 @@
       <div class="glass-card p-5 relative overflow-hidden">
         <div class="flex justify-between items-start">
           <div>
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">คะแนน KKU-AELT สูงสุด (Sheet 2)</p>
-            <h3 class="text-2xl font-bold text-amber-400 mt-1" id="kpiAeltBest">- <span class="text-xs font-normal text-slate-400">/ 62 (เกณฑ์ ป.เอก)</span></h3>
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">คะแนน KKU-AELT</p>
+            <h3 class="text-2xl font-bold text-amber-400 mt-1" id="kpiAeltBest">- <span class="text-xs font-normal text-slate-400">/ 62</span></h3>
           </div>
           <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-lg flex-shrink-0">
             <i class="fa-solid fa-file-signature"></i>
@@ -203,8 +230,8 @@
             <div id="kpiAeltBar" class="bg-amber-400 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
           </div>
           <p class="text-xs text-slate-400 mt-2 flex justify-between items-center" id="kpiAeltSubtitle">
-            <span>สอบไปแล้ว: <strong id="kpiAeltCount">0</strong> ครั้ง</span>
-            <span id="kpiAeltGapBadge" class="text-amber-300 font-medium">รอข้อมูลออนไลน์...</span>
+            <span>สอบ: <strong id="kpiAeltCount">0</strong> ครั้ง</span>
+            <span id="kpiAeltGapBadge" class="text-amber-300 font-medium">รอข้อมูล</span>
           </p>
         </div>
       </div>
@@ -213,7 +240,7 @@
       <div class="glass-card p-5 relative overflow-hidden">
         <div class="flex justify-between items-start">
           <div>
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">ความคืบหน้าโมเดล (MI-DL-Tasks)</p>
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">ความคืบหน้าโมเดล</p>
             <h3 class="text-2xl font-bold text-white mt-1" id="kpiModelProg">0.0%</h3>
           </div>
           <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-lg flex-shrink-0">
@@ -225,8 +252,8 @@
             <div id="kpiModelBar" class="bg-purple-400 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
           </div>
           <p class="text-xs text-slate-400 mt-2 flex justify-between">
-            <span>เสร็จสิ้น: <strong id="kpiModelDone">0</strong> / <span id="kpiModelTotal">0</span> การทดลอง</span>
-            <span class="text-purple-300">Proposed: MI-DL</span>
+            <span>เสร็จ: <strong id="kpiModelDone">0</strong> / <span id="kpiModelTotal">0</span></span>
+            <span class="text-purple-300">MI-DL</span>
           </p>
         </div>
       </div>
@@ -235,8 +262,8 @@
       <div class="glass-card p-5 relative overflow-hidden">
         <div class="flex justify-between items-start">
           <div>
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">OVERALL ACCURACY (OA)</p>
-            <h3 class="text-base font-bold text-emerald-400 mt-1">MI-DL (Proposed)</h3>
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">OVERALL ACCURACY</p>
+            <h3 class="text-sm font-bold text-emerald-400 mt-1">MI-DL (Proposed)</h3>
           </div>
           <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-lg flex-shrink-0">
             <i class="fa-solid fa-bullseye"></i>
@@ -253,6 +280,7 @@
           </div>
         </div>
       </div>
+
     </div>
 
     <!-- 4 TABS NAVIGATION -->
@@ -424,29 +452,27 @@
       </div>
     </div>
 
-    <!-- TAB 4: MI-DL MODEL EVALUATION -->
+    <!-- TAB 4: MI-DL MODEL EVALUATION (HIGHLIGHT BEST MODEL) -->
     <div id="tab4-content" class="tab-panel hidden space-y-4">
       <div class="glass-card overflow-hidden border border-slate-800">
         <div class="p-4 border-b border-slate-800 flex justify-between items-center">
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider">ผลการประเมินประสิทธิภาพและการทดสอบความแตกต่างทางสถิติ (MI-DL-Model-Evaluation)</h4>
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider">ผลการประเมินประสิทธิภาพ (MI-DL-Model-Evaluation) <span class="text-emerald-400 font-normal ml-2">(⭐ แถวสีเขียวคือโมเดลที่มีค่าความถูกต้องสูงสุด)</span></h4>
         </div>
         <div class="w-full overflow-x-auto custom-scrollbar">
           <table class="w-full text-left text-xs border-collapse">
             <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-800 text-[11px]">
               <tr>
-                <th class="py-3 px-3 font-semibold">แบบจำลอง (Model)</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Accuracy (OA)</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Kappa</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Macro F1</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Precision</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Recall</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Inference Time</th>
-                <th class="py-3 px-3 font-semibold">การทดสอบทางสถิติ</th>
-                <th class="py-3 px-3 font-semibold">ระดับนัยสำคัญ (p-value)</th>
+                <th class="py-3 px-3 font-semibold">Model <span class="block text-[10px] text-slate-400 font-normal">(แบบจำลอง)</span></th>
+                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Accuracy (ความถูกต้องรวม / OA)</th>
+                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Kappa (ค่าความสอดคล้อง)</th>
+                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Macro F1 (คะแนนสมดุล)</th>
+                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Precision (ความแม่นยำ)</th>
+                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Recall (อัตราการตรวจจับ)</th>
+                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Training Time (เวลา Training / hs.)</th>
               </tr>
             </thead>
             <tbody id="evalStatsBody" class="divide-y divide-slate-800 font-mono text-xs">
-              <tr><td colspan="9" class="text-center py-8 text-slate-400">กำลังรอข้อมูล...</td></tr>
+              <tr><td colspan="7" class="text-center py-8 text-slate-400">กำลังรอข้อมูล...</td></tr>
             </tbody>
           </table>
         </div>
@@ -465,11 +491,11 @@
   <footer class="border-t border-slate-800/80 bg-slate-950 py-3 text-center text-xs text-slate-500">
     <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
       <div>Ph.D. Dissertation Tracking System &bull; Khon Kaen University</div>
-      <div>Auto Sync ทุก 1 นาที (4-Tab Database Engine)</div>
+      <div>Auto Sync ทุก 1 นาที (Best Model Highlighting Engine)</div>
     </div>
   </footer>
 
-  <!-- ================= JAVASCRIPT 4-TAB ENGINE ================= -->
+  <!-- ================= JAVASCRIPT HIGHLIGHT ENGINE ================= -->
   <script>
     const PASSING_CRITERIA = 62;
     const SHEET_ID = '1otMbL4H8xBOF-E7ZnK8w1uHpSqwna1gpXKI35PkU0J4';
@@ -575,17 +601,29 @@
       try {
         const rows4 = await fetchCSV(TAB_NAMES.sheet4);
         if (rows4 && rows4.length > 0) {
-          appData.sheet3_stats = rows4.filter(r => r.model_name).map((r, idx) => ({
-            model: r.model_name || `Model ${idx+1}`,
-            oa: r.accuracy || '0.0%',
-            kappa: parseNum(r.kappa),
-            f1: r.f1_score || '0.0%',
-            precision: r.precision || '0.0%',
-            recall: r.recall || '0.0%',
-            time: parseNum(r.inference_time),
-            test: r.test || 'T-Test',
-            pval: r.p_value || '-'
-          }));
+          appData.sheet3_stats = rows4.filter(r => r.model_name).map((r, idx) => {
+            let timeVal = '-';
+            for (let key in r) {
+              if (key.toLowerCase().includes('time') || key.toLowerCase().includes('hs') || key.toLowerCase().includes('เวลา')) {
+                timeVal = r[key];
+              }
+            }
+            // แปลงค่า accuracy เป็นตัวเลขเพื่อใช้วัดค่าสูงสุด
+            let rawAcc = r.accuracy || '0';
+            let accNum = parseFloat(String(rawAcc).replace('%', '').trim());
+            if (!isNaN(accNum) && accNum > 0 && accNum <= 1.0) accNum = accNum * 100;
+
+            return {
+              model: r.model_name || `Model ${idx+1}`,
+              oa: rawAcc,
+              oaNum: isNaN(accNum) ? 0 : accNum,
+              kappa: parseNum(r.kappa),
+              f1: r.macro_f1 || r.f1_score || '0.0%',
+              precision: r.macro_precision || r.precision || '0.0%',
+              recall: r.macro_recall || r.recall || '0.0%',
+              time: parseNum(timeVal)
+            };
+          });
           successCount++;
         }
       } catch (e4) { console.warn('Sheet 4 failed:', e4); }
@@ -630,24 +668,28 @@
     }
 
     function renderOverviewKPIs() {
+      // 1. Data Prep Progress
       const tasks1 = appData.sheet1 || [];
+      let avgProg1 = 0;
       if (tasks1.length > 0) {
-        const done1 = tasks1.filter(t => t.status === 'Success' || t.progress === 100).length;
+        const done1 = tasks1.filter(t => t.status === 'Success' || t.progress >= 100).length;
         const inProg1 = tasks1.filter(t => t.status === 'In progress' || (t.progress > 0 && t.progress < 100)).length;
-        const avgProg1 = tasks1.reduce((s, t) => s + (Number(t.progress) || 0), 0) / tasks1.length;
+        avgProg1 = tasks1.reduce((s, t) => s + (Number(t.progress) || 0), 0) / tasks1.length;
 
         document.getElementById('kpiDataPrepProg').innerText = `${avgProg1.toFixed(1)}%`;
         document.getElementById('kpiDataPrepBar').style.width = `${Math.min(100, avgProg1)}%`;
         document.getElementById('kpiDataDone').innerText = done1;
         document.getElementById('kpiDataTotal').innerText = tasks1.length;
-        document.getElementById('kpiDataInProgress').innerText = `กำลังทำ ${inProg1}`;
+        document.getElementById('kpiDataInProgress').innerText = `ทำ ${inProg1}`;
         document.getElementById('tab1AvgBadge').innerText = `${avgProg1.toFixed(1)}%`;
       }
 
+      // 2. MI-DL Tasks Progress
       const tasks3 = appData.sheet3_tasks || [];
+      let avgProg3 = 0;
       if (tasks3.length > 0) {
-        const done3 = tasks3.filter(t => t.status === 'Success' || t.progress === 100).length;
-        const avgProg3 = tasks3.reduce((s, t) => s + (Number(t.progress) || 0), 0) / tasks3.length;
+        const done3 = tasks3.filter(t => t.status === 'Success' || t.progress >= 100).length;
+        avgProg3 = tasks3.reduce((s, t) => s + (Number(t.progress) || 0), 0) / tasks3.length;
 
         document.getElementById('kpiModelProg').innerText = `${avgProg3.toFixed(1)}%`;
         document.getElementById('kpiModelBar').style.width = `${Math.min(100, avgProg3)}%`;
@@ -656,10 +698,15 @@
         document.getElementById('modelProgressBadge').innerText = `ความคืบหน้ารวม: ${avgProg3.toFixed(1)}%`;
       }
 
-      // Dynamic Overall Accuracy (OA) calculation from Sheet 4 Stats
+      // 3. Overall Research Progress
+      const overallResearchProg = (avgProg1 + avgProg3) / 2;
+      document.getElementById('kpiOverallResearchProg').innerText = `${overallResearchProg.toFixed(1)}%`;
+      document.getElementById('kpiOverallResearchBar').style.width = `${Math.min(100, overallResearchProg)}%`;
+
+      // 4. Overall Accuracy (OA) Summary from Sheet 4
       const stats = appData.sheet3_stats || [];
       const proposedModel = stats.find(s => s.model && s.model.toLowerCase().includes('mi-dl'));
-      const baselineModels = stats.filter(s => s.model && !s.model.toLowerCase().includes('mi-dl') && !s.model.toLowerCase().includes('ค่าเฉลี่ย'));
+      const baselineModels = stats.filter(s => s.model && !s.model.toLowerCase().includes('mi-dl'));
 
       if (proposedModel) {
         document.getElementById('kpiProposedOA').innerText = proposedModel.oa !== undefined && proposedModel.oa !== '-' ? proposedModel.oa : '0.0%';
@@ -798,20 +845,32 @@
 
     function renderEvalStatsTable() {
       const tbody = document.getElementById('evalStatsBody');
-      if (!appData.sheet3_stats || appData.sheet3_stats.length === 0) return;
-      tbody.innerHTML = appData.sheet3_stats.map(row => `
-        <tr class="hover:bg-slate-800/40 transition font-mono text-xs">
-          <td class="py-3 px-4 font-sans text-xs">${row.model}</td>
-          <td class="py-3 px-3 text-center">${row.oa}</td>
-          <td class="py-3 px-3 text-center">${row.kappa}</td>
-          <td class="py-3 px-3 text-center">${row.f1}</td>
-          <td class="py-3 px-3 text-center">${row.precision}</td>
-          <td class="py-3 px-3 text-center">${row.recall}</td>
-          <td class="py-3 px-3 text-center">${row.time} ms</td>
-          <td class="py-3 px-4 font-sans text-xs text-slate-400">${row.test}</td>
-          <td class="py-3 px-4 font-sans text-xs">${row.pval}</td>
-        </tr>
-      `).join('');
+      const stats = appData.sheet3_stats || [];
+      if (stats.length === 0) return;
+
+      // ค้นหาค่า OA สูงสุดจากทุกโมเดล
+      let maxOaNum = -1;
+      stats.forEach(row => {
+        if (row.oaNum > maxOaNum) maxOaNum = row.oaNum;
+      });
+
+      tbody.innerHTML = stats.map(row => {
+        const isBest = (row.oaNum === maxOaNum && maxOaNum > 0);
+        const rowClass = isBest ? 'best-model-row text-emerald-300 text-sm font-bold shadow-lg' : 'hover:bg-slate-800/40 transition font-mono text-xs';
+        const bestBadge = isBest ? ' <span class="ml-2 px-2 py-0.5 rounded text-[10px] bg-emerald-500 text-slate-950 font-bold uppercase tracking-wider">⭐ Best Model</span>' : '';
+
+        return `
+          <tr class="${rowClass}">
+            <td class="py-3 px-4 font-sans text-xs">${row.model}${bestBadge}</td>
+            <td class="py-3 px-3 text-center ${isBest ? 'text-emerald-400 text-base font-black' : ''}">${row.oa}</td>
+            <td class="py-3 px-3 text-center">${row.kappa}</td>
+            <td class="py-3 px-3 text-center">${row.f1}</td>
+            <td class="py-3 px-3 text-center">${row.precision}</td>
+            <td class="py-3 px-3 text-center">${row.recall}</td>
+            <td class="py-3 px-3 text-center">${row.time} hs.</td>
+          </tr>
+        `;
+      }).join('');
     }
 
     function switchTab(tabId) {
@@ -833,7 +892,7 @@
 
     function updateSyncStatusUI(success, msg) {
       document.getElementById('lastSyncTimeText').innerText = new Date().toLocaleTimeString('th-TH');
-      document.getElementById('liveStatusDot', 'className').className = success ? 'w-2.5 h-2.5 rounded-full bg-emerald-400 badge-pulse mr-2' : 'w-2.5 h-2.5 rounded-full bg-rose-500 mr-2';
+      document.getElementById('liveStatusDot').className = success ? 'w-2.5 h-2.5 rounded-full bg-emerald-400 badge-pulse mr-2' : 'w-2.5 h-2.5 rounded-full bg-rose-500 mr-2';
       document.getElementById('liveStatusText').innerText = msg;
     }
 
