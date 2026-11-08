@@ -3,16 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ph.D. Research Dashboard | Highlight Best Model Sync</title>
+  <title>Ph.D. Research Dashboard | Eval Fix Engine</title>
   
-  <!-- Tailwind CSS Engine -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- PapaParse for CSV parsing -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <!-- Chart.js for multi-metric lines -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,81 +17,35 @@
   <script>
     tailwind.config = {
       darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Kanit', 'Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          }
-        }
-      }
+      theme: { extend: { fontFamily: { sans: ['Kanit', 'Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
     }
   </script>
 
   <style>
     * { box-sizing: border-box; }
-    body {
-      font-family: 'Kanit', sans-serif;
-      background-color: #0b0f19;
-      color: #e2e8f0;
-      margin: 0;
-      padding: 0;
-      -webkit-font-smoothing: antialiased;
-    }
-    .glass-card {
-      background: rgba(17, 24, 39, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 1rem;
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: #0b0f19;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 9999px;
-    }
-    .badge-pulse {
-      animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    @keyframes pulse-ring {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.35; }
-    }
-    @keyframes spin-sync {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .spinning {
-      animation: spin-sync 0.8s linear infinite;
-    }
-    .tab-btn-active {
-      border-bottom: 2px solid #6366f1 !important;
-      color: #818cf8 !important;
-    }
-    .best-model-row {
-      background-color: rgba(6, 78, 59, 0.4) !important;
-      border-left: 4px solid #10b981 !important;
-      font-weight: 600 !important;
-    }
+    body { font-family: 'Kanit', sans-serif; background-color: #0b0f19; color: #e2e8f0; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    .glass-card { background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 1rem; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0b0f19; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
+    .badge-pulse { animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    @keyframes pulse-ring { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+    @keyframes spin-sync { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spinning { animation: spin-sync 0.8s linear infinite; }
+    .tab-btn-active { border-bottom: 2px solid #6366f1 !important; color: #818cf8 !important; }
+    .best-model-row { background-color: rgba(6, 78, 59, 0.4) !important; border-left: 4px solid #10b981 !important; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
 
-  <!-- ================= TOP HEADER BAR ================= -->
+  <!-- TOP HEADER BAR -->
   <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 shadow-2xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
       <div class="flex flex-col lg:flex-row items-center justify-between gap-3">
-        
         <div class="flex items-center space-x-3 w-full lg:w-auto justify-between lg:justify-start">
           <div class="flex items-center space-x-3">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/25 ring-1 ring-white/10 flex-shrink-0">
-              <i class="fa-solid fa-graduation-cap text-white text-lg"></i>
+              <i class="fa-solid fa-bolt text-amber-300 text-lg"></i>
             </div>
             <div>
               <div class="flex items-center space-x-2">
@@ -103,35 +53,26 @@
                   Ph.D. Research Dashboard
                 </h1>
                 <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
-                  4-Sheet Real-Time Sync
+                  Ultra-Fast Async Sync
                 </span>
               </div>
-              <p class="text-xs text-slate-400">Meteorology-Informed Deep Learning (MI-DL) • Best Model Highlighter</p>
+              <p class="text-xs text-slate-400">Meteorology-Informed Deep Learning (MI-DL) &bull; Evaluation & Comparison Mode</p>
             </div>
           </div>
         </div>
-
         <div class="flex flex-wrap items-center justify-end gap-2 w-full lg:w-auto">
           <div class="flex items-center px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs shadow-inner">
             <span id="liveStatusDot" class="w-2.5 h-2.5 rounded-full bg-amber-400 badge-pulse mr-2"></span>
-            <span id="liveStatusText" class="font-medium text-slate-200">กำลังเชื่อมต่อฐานข้อมูล...</span>
+            <span id="liveStatusText" class="font-medium text-slate-200">กำลังเชื่อมต่อ...</span>
             <span class="mx-2 text-slate-700">|</span>
             <span class="text-slate-400">อัปเดต: <strong id="lastSyncTimeText" class="text-slate-200 font-mono">-</strong></span>
             <span class="mx-1 text-slate-700">|</span>
             <span class="text-indigo-400 font-mono font-bold text-xs" id="countdownText">60s</span>
           </div>
-
           <button onclick="triggerLiveSync(true)" id="btnSyncNow" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md transition active:scale-95">
             <i class="fa-solid fa-rotate mr-1.5" id="syncIcon"></i>
             <span id="syncBtnText">ซิงค์สด</span>
           </button>
-          
-          <!-- 
-          <a href="https://docs.google.com/spreadsheets/d/1otMbL4H8xBOF-E7ZnK8w1uHpSqwna1gpXKI35PkU0J4/edit?usp=sharing" target="_blank" class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 border border-emerald-800 transition">
-            <i class="fa-solid fa-file-excel mr-1.5"></i>
-            <span>เปิด Google Sheet</span>
-          </a> -->
-        
         </div>
       </div>
     </div>
@@ -139,511 +80,366 @@
 
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4">
 
-    <!-- Source Indicator -->
-    <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800 text-xs flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <span class="text-indigo-400 font-bold"><i class="fa-solid fa-database mr-1"></i> แหล่งข้อมูล:</span>
-        <span class="text-slate-200 font-medium">เชื่อมต่อ 4 ชีตหลัก: data-preparation, KKU-AELT-score, MI-DL-Tasks, MI-DL-Model-Evaluation</span>
-      </div>
-    </div>
-
-    <!-- Connection Error Warning Banner -->
-    <div id="connectionErrorBanner" class="hidden bg-rose-950/80 border border-rose-600/80 rounded-2xl p-4 shadow-xl">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <div class="flex items-start space-x-3">
-          <div class="w-9 h-9 rounded-xl bg-rose-600 flex items-center justify-center text-white flex-shrink-0 mt-0.5">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-          </div>
-          <div>
-            <h3 class="text-sm font-bold text-rose-200">ยังไม่สามารถดึงข้อมูลออนไลน์ได้</h3>
-            <p class="text-xs text-rose-300 mt-1 leading-relaxed">
-              กรุณาตรวจสอบว่าได้ทำการ <strong>"เผยแพร่ไปยังเว็บ (Publish to web)"</strong> ทุกแท็บเรียบร้อยแล้ว
-            </p>
-          </div>
-        </div>
-        <div class="flex items-center space-x-2 flex-shrink-0">
-          <button onclick="triggerLiveSync(true)" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold shadow transition">
-            ลองเชื่อมต่ออีกครั้ง
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ================= EXECUTIVE KPI SUMMARY CARDS (5 Cards) ================= -->
+    <!-- 5 EXECUTIVE KPI CARDS -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-      
-      <!-- Card 0: Overall Research Progress -->
       <div class="glass-card p-5 relative overflow-hidden border-indigo-500/30 bg-gradient-to-br from-indigo-950/40 to-slate-900/80">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-xs font-semibold text-indigo-300 uppercase tracking-wider">ความคืบหน้ารวมงานวิจัย</p>
-            <h3 class="text-2xl font-bold text-white mt-1" id="kpiOverallResearchProg">0.0%</h3>
-          </div>
-          <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-lg flex-shrink-0">
-            <i class="fa-solid fa-chart-pie"></i>
-          </div>
+        <p class="text-xs font-semibold text-indigo-300 uppercase tracking-wider">ภาพรวมดุษฎีนิพนธ์</p>
+        <h3 class="text-2xl font-bold text-white mt-1" id="kpiOverallResearchProg">0.0%</h3>
+        <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden mt-3">
+          <div id="kpiOverallResearchBar" class="bg-indigo-500 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
         </div>
-        <div class="mt-3">
-          <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-            <div id="kpiOverallResearchBar" class="bg-indigo-500 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
-          </div>
-          <p class="text-xs text-slate-400 mt-2 flex justify-between">
-            <span>สถานะภาพรวม</span>
-            <span class="text-indigo-300 font-semibold">ภาพรวมดุษฎีนิพนธ์</span>
-          </p>
-        </div>
+        <p class="text-[11px] text-slate-400 mt-2">ความคืบหน้ารวมทุกส่วน</p>
       </div>
-
-      <!-- Card 1: Data Prep Progress -->
       <div class="glass-card p-5 relative overflow-hidden">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">งานเตรียมข้อมูล</p>
-            <h3 class="text-2xl font-bold text-white mt-1" id="kpiDataPrepProg">0.0%</h3>
-          </div>
-          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-lg flex-shrink-0">
-            <i class="fa-solid fa-satellite"></i>
-          </div>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">งานเตรียมข้อมูล</p>
+        <h3 class="text-2xl font-bold text-white mt-1" id="kpiDataPrepProg">0.0%</h3>
+        <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden mt-3">
+          <div id="kpiDataPrepBar" class="bg-cyan-400 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
         </div>
-        <div class="mt-3">
-          <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-            <div id="kpiDataPrepBar" class="bg-cyan-400 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
-          </div>
-          <p class="text-xs text-slate-400 mt-2 flex justify-between">
-            <span>เสร็จ: <strong class="text-emerald-400" id="kpiDataDone">0</strong> / <span id="kpiDataTotal">0</span></span>
-            <span class="text-slate-400" id="kpiDataInProgress">ทำ 0</span>
-          </p>
-        </div>
+        <p class="text-[11px] text-slate-400 mt-2">รวม Data 24 เดือน & ERA5</p>
       </div>
-
-      <!-- Card 2: KKU-AELT Score (Target 62) -->
       <div class="glass-card p-5 relative overflow-hidden">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">คะแนน KKU-AELT</p>
-            <h3 class="text-2xl font-bold text-amber-400 mt-1" id="kpiAeltBest">- <span class="text-xs font-normal text-slate-400">/ 62</span></h3>
-          </div>
-          <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-lg flex-shrink-0">
-            <i class="fa-solid fa-file-signature"></i>
-          </div>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">คะแนน KKU-AELT สูงสุด</p>
+        <h3 class="text-2xl font-bold text-amber-400 mt-1" id="kpiAeltBest">- <span class="text-xs font-normal text-slate-400">/ 62</span></h3>
+        <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden mt-3">
+          <div id="kpiAeltBar" class="bg-amber-400 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
         </div>
-        <div class="mt-3">
-          <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-            <div id="kpiAeltBar" class="bg-amber-400 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
-          </div>
-          <p class="text-xs text-slate-400 mt-2 flex justify-between items-center" id="kpiAeltSubtitle">
-            <span>สอบ: <strong id="kpiAeltCount">0</strong> ครั้ง</span>
-            <span id="kpiAeltGapBadge" class="text-amber-300 font-medium">รอข้อมูล</span>
-          </p>
-        </div>
+        <p class="text-[11px] text-slate-400 mt-2" id="kpiAeltSubtitle">เกณฑ์ผ่าน Band 5 สำหรับ ป.เอก</p>
       </div>
-
-      <!-- Card 3: Model Pipeline Progress -->
       <div class="glass-card p-5 relative overflow-hidden">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">ความคืบหน้าโมเดล</p>
-            <h3 class="text-2xl font-bold text-white mt-1" id="kpiModelProg">0.0%</h3>
-          </div>
-          <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-lg flex-shrink-0">
-            <i class="fa-solid fa-brain"></i>
-          </div>
-        </div>
-        <div class="mt-3">
-          <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-            <div id="kpiModelBar" class="bg-purple-400 h-1.5 rounded-full transition-all duration-700" style="width: 0%"></div>
-          </div>
-          <p class="text-xs text-slate-400 mt-2 flex justify-between">
-            <span>เสร็จ: <strong id="kpiModelDone">0</strong> / <span id="kpiModelTotal">0</span></span>
-            <span class="text-purple-300">MI-DL</span>
-          </p>
-        </div>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">BEST OA (6 CLASS)</p>
+        <h3 class="text-2xl font-bold text-emerald-400 mt-1 font-mono" id="kpiBestOa6">0.0%</h3>
+        <p class="text-xs text-emerald-400 mt-3 font-semibold truncate" id="kpiBestOa6Model">-</p>
+        <p class="text-[11px] text-slate-400 mt-0.5">โมเดล 6 Class ที่แม่นยำที่สุด</p>
       </div>
-
-      <!-- Card 4: Overall Accuracy (OA) Summary -->
       <div class="glass-card p-5 relative overflow-hidden">
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">OVERALL ACCURACY</p>
-            <h3 class="text-sm font-bold text-emerald-400 mt-1">MI-DL (Proposed)</h3>
-          </div>
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-lg flex-shrink-0">
-            <i class="fa-solid fa-bullseye"></i>
-          </div>
-        </div>
-        <div class="mt-3 text-xs space-y-1">
-          <div class="flex justify-between text-slate-400">
-            <span>Proposed OA:</span>
-            <span class="font-mono text-emerald-400 font-semibold text-sm" id="kpiProposedOA">0.0%</span>
-          </div>
-          <div class="flex justify-between text-slate-400">
-            <span>Baseline สูงสุด:</span>
-            <span class="font-mono text-cyan-400 font-semibold" id="kpiBestBaselineOA">-</span>
-          </div>
-        </div>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">BEST OA (13 CLASS)</p>
+        <h3 class="text-2xl font-bold text-purple-400 mt-1 font-mono" id="kpiBestOa13">0.0%</h3>
+        <p class="text-xs text-purple-400 mt-3 font-semibold truncate" id="kpiBestOa13Model">-</p>
+        <p class="text-[11px] text-slate-400 mt-0.5">โมเดล 13 Class ที่แม่นยำที่สุด</p>
       </div>
-
     </div>
 
-    <!-- 4 TABS NAVIGATION -->
-    <div class="border-b border-slate-800 flex items-center justify-between">
-      <nav class="flex space-x-2 sm:space-x-4 overflow-x-auto custom-scrollbar pb-1">
-        <button onclick="switchTab('tab1')" id="nav-tab1" class="tab-btn-active px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 whitespace-nowrap">
-          <i class="fa-solid fa-satellite-dish"></i> Data-preparation
+    <!-- NAVIGATION TABS -->
+    <div class="border-b border-slate-800 flex items-center justify-between mt-6">
+      <nav class="flex space-x-2 sm:space-x-3 overflow-x-auto custom-scrollbar pb-1">
+        <button onclick="switchTab('tab1')" id="nav-tab1" class="tab-btn-active px-3 py-3 text-[13px] font-semibold border-b-2 text-slate-400 hover:text-slate-200 flex items-center gap-1.5 whitespace-nowrap">
+          <i class="fa-solid fa-database"></i> เตรียมข้อมูล
         </button>
-        <button onclick="switchTab('tab2')" id="nav-tab2" class="px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 whitespace-nowrap">
-          <i class="fa-solid fa-book-open"></i> KKU-AELT-score
+        <button onclick="switchTab('tab2')" id="nav-tab2" class="px-3 py-3 text-[13px] font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-1.5 whitespace-nowrap">
+          <i class="fa-solid fa-award"></i> KKU-AELT
         </button>
-        <button onclick="switchTab('tab3')" id="nav-tab3" class="px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 whitespace-nowrap">
-          <i class="fa-solid fa-tasks"></i> MI-DL-Tasks
+        <button onclick="switchTab('tab3')" id="nav-tab3" class="px-3 py-3 text-[13px] font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-1.5 whitespace-nowrap">
+          <i class="fa-solid fa-tasks"></i> Tasks (6 Class)
         </button>
-        <button onclick="switchTab('tab4')" id="nav-tab4" class="px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 whitespace-nowrap">
-          <i class="fa-solid fa-network-wired"></i> MI-DL-Model-Evaluation
+        <button onclick="switchTab('tab4')" id="nav-tab4" class="px-3 py-3 text-[13px] font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-1.5 whitespace-nowrap">
+          <i class="fa-solid fa-tasks"></i> Tasks (13 Class)
+        </button>
+        <button onclick="switchTab('tab5')" id="nav-tab5" class="px-3 py-3 text-[13px] font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-1.5 whitespace-nowrap">
+          <i class="fa-solid fa-bullseye"></i> Eval (6 Class)
+        </button>
+        <button onclick="switchTab('tab6')" id="nav-tab6" class="px-3 py-3 text-[13px] font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-1.5 whitespace-nowrap">
+          <i class="fa-solid fa-bullseye"></i> Eval (13 Class)
+        </button>
+        <button onclick="switchTab('tab7')" id="nav-tab7" class="px-3 py-3 text-[13px] font-semibold border-b-2 border-transparent text-amber-400 hover:text-amber-300 flex items-center gap-1.5 whitespace-nowrap">
+          <i class="fa-solid fa-chart-pie"></i> เปรียบเทียบ 📊
         </button>
       </nav>
     </div>
 
-    <!-- TAB 1: DATA PREPARATION -->
+    <!-- TAB 1: DATA PREP -->
     <div id="tab1-content" class="tab-panel space-y-4">
-      <div class="glass-card p-4 flex flex-col md:flex-row gap-3 items-center justify-between">
-        <div class="flex items-center gap-2.5 w-full md:w-auto">
-          <div class="relative w-full md:w-72">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-500 text-xs"></i>
-            <input type="text" id="taskSearch" oninput="renderDataPrepTable()" placeholder="ค้นหางานเตรียมข้อมูล..." class="w-full pl-8 pr-3 py-1.5 text-xs bg-slate-950 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
-          </div>
-          <select id="categoryFilter" onchange="renderDataPrepTable()" class="text-xs bg-slate-950 border border-slate-700 rounded-lg text-slate-300 py-1.5 px-3 focus:outline-none focus:border-indigo-500">
-            <option value="ALL">หมวดหมู่ทั้งหมด</option>
-          </select>
-        </div>
-        <div class="text-xs text-slate-400 flex items-center gap-2">
-          <span>ความคืบหน้าเฉลี่ยหมวดนี้:</span>
-          <span class="px-2.5 py-1 rounded bg-indigo-950/80 text-indigo-300 font-bold border border-indigo-800" id="tab1AvgBadge">0.0%</span>
-        </div>
-      </div>
-
-      <div class="glass-card overflow-hidden border border-slate-800">
+      <div class="glass-card overflow-hidden border border-slate-800 mt-2">
         <div class="w-full overflow-x-auto custom-scrollbar">
           <table class="w-full text-left text-xs border-collapse">
             <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-800 text-[11px]">
               <tr>
-                <th class="py-3 px-3 w-10 text-center font-semibold">#</th>
-                <th class="py-3 px-3 w-[28%] font-semibold">รายการงานเตรียมข้อมูล (Task Description)</th>
-                <th class="py-3 px-3 w-[22%] font-semibold whitespace-nowrap">หมวดหมู่งาน (Category)</th>
-                <th class="py-3 px-2 w-[10%] text-center font-semibold whitespace-nowrap">วันเริ่มต้น</th>
-                <th class="py-3 px-2 w-[10%] text-center font-semibold whitespace-nowrap">วันสิ้นสุด</th>
-                <th class="py-3 px-2 w-[11%] text-center font-semibold whitespace-nowrap">สถานะ</th>
-                <th class="py-3 px-3 w-[9%] whitespace-nowrap">% คืบหน้า</th>
-                <th class="py-3 px-3 w-[10%] font-semibold">หมายเหตุ / รายละเอียด</th>
+                <th class="py-3 px-3 text-center font-semibold">#</th>
+                <th class="py-3 px-3 font-semibold">รายการงานเตรียมข้อมูล</th>
+                <th class="py-3 px-3 font-semibold">หมวดหมู่</th>
+                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">วันเริ่มต้น</th>
+                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">วันสิ้นสุด</th>
+                <th class="py-3 px-2 text-center font-semibold">สถานะ</th>
+                <th class="py-3 px-3 whitespace-nowrap">% คืบหน้า</th>
+                <th class="py-3 px-3 font-semibold">หมายเหตุ</th>
               </tr>
             </thead>
             <tbody id="dataPrepTableBody" class="divide-y divide-slate-800 text-slate-300">
-              <tr><td colspan="8" class="text-center py-10 text-slate-400"><i class="fa-solid fa-spinner fa-spin mr-2 text-indigo-400"></i> กำลังดึงข้อมูลจาก Database...</td></tr>
+              <tr><td colspan="8" class="text-center py-8 text-slate-400">กำลังโหลดข้อมูล...</td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- TAB 2: KKU-AELT SCORE -->
+    <!-- TAB 2: KKU-AELT -->
     <div id="tab2-content" class="tab-panel hidden space-y-4">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div class="glass-card p-5 flex flex-col justify-between space-y-4">
-          <div>
-            <div class="flex items-center justify-between">
-              <h4 class="text-sm font-semibold text-white flex items-center gap-2">
-                <i class="fa-solid fa-award text-amber-400"></i> สรุปผลสอบ KKU-AELT
-              </h4>
-              <span class="px-2 py-0.5 rounded text-xs bg-indigo-950/80 text-indigo-300 font-mono font-semibold border border-indigo-800">เกณฑ์ผ่าน: 62 คะแนน</span>
-            </div>
-            <p class="text-xs text-slate-400 mt-1">เกณฑ์ระดับ ป.เอก ต้องได้คะแนนรวม &ge; 62 คะแนน</p>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-2">
+          
+          <!-- LEFT PANEL: Summary & Evaluation Criteria -->
+          <div class="glass-card p-5 lg:col-span-1 flex flex-col gap-4">
+              <div>
+                  <h4 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                      <i class="fa-solid fa-trophy text-amber-400"></i> สรุปคะแนนสูงสุด
+                  </h4>
+                  <div class="space-y-3">
+                      <div class="flex justify-between items-center bg-slate-900/50 p-3 rounded-lg border border-slate-800">
+                          <div>
+                              <div class="text-xs text-slate-400">Reading สูงสุด</div>
+                              <div class="text-[10px] text-slate-500">สอบครั้งที่ <span id="summaryReadingAttempt">-</span></div>
+                          </div>
+                          <div class="text-2xl font-black text-cyan-400" id="summaryReadingScore">-</div>
+                      </div>
+                      <div class="flex justify-between items-center bg-slate-900/50 p-3 rounded-lg border border-slate-800">
+                          <div>
+                              <div class="text-xs text-slate-400">Writing สูงสุด</div>
+                              <div class="text-[10px] text-slate-500">สอบครั้งที่ <span id="summaryWritingAttempt">-</span></div>
+                          </div>
+                          <div class="text-2xl font-black text-purple-400" id="summaryWritingScore">-</div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="mt-2 pt-4 border-t border-slate-800">
+                  <h4 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                      <i class="fa-solid fa-circle-check text-emerald-400"></i> สถานะการผ่านเกณฑ์ ป.เอก
+                  </h4>
+                  <div class="text-center mb-3">
+                      <span class="text-xs text-slate-400">คะแนนรวมสูงสุด (Overall): </span>
+                      <span class="text-xl font-bold text-amber-400" id="summaryOverallScore">-</span>
+                  </div>
+                  <!-- กล่องสรุปผ่าน/ไม่ผ่าน จะเปลี่ยนสีตามฟังก์ชัน evaluateAeltLevel -->
+                  <div id="summaryEvalStatus" class="p-3 rounded-lg text-center font-bold text-sm shadow-md bg-slate-800 border-slate-700 text-slate-400">
+                      กำลังประมวลผล...
+                  </div>
+                  <div id="summaryEvalTraining" class="text-center text-[11px] font-medium mt-3">
+                  </div>
+              </div>
+              
+              <div class="mt-auto pt-4 text-center">
+                 <p class="text-[10px] text-slate-500 leading-relaxed">
+                    * อ้างอิงประกาศ มข. ฉบับที่ 77/2566 (7-Band)<br>เกณฑ์ผ่าน ป.เอก = Overall ระดับ 5 ขึ้นไป (≥ 62)
+                 </p>
+              </div>
           </div>
 
-          <div class="space-y-3">
-            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
-              <div>
-                <span class="text-xs text-slate-400">คะแนน Reading สูงสุด</span>
-                <div class="text-xl font-bold text-cyan-400" id="statBestReading">-</div>
-              </div>
+          <!-- RIGHT PANEL: Line Chart -->
+          <div class="glass-card p-5 lg:col-span-2 flex flex-col">
+            <div class="flex items-center justify-between mb-3">
+                <h4 class="text-sm font-semibold text-white">กราฟแนวโน้มคะแนนสอบรายครั้ง</h4>
+                <div class="flex items-center space-x-3 text-[11px] text-slate-300 font-mono">
+                    <span class="flex items-center"><span class="w-2.5 h-2.5 bg-cyan-400 rounded-full mr-1.5"></span> Reading</span>
+                    <span class="flex items-center"><span class="w-2.5 h-2.5 bg-purple-400 rounded-full mr-1.5"></span> Writing</span>
+                    <span class="flex items-center"><span class="w-2.5 h-2.5 bg-amber-400 rounded-full mr-1.5"></span> Overall</span>
+                </div>
             </div>
-            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex justify-between items-center">
-              <div>
-                <span class="text-xs text-slate-400">คะแนน Writing สูงสุด</span>
-                <div class="text-xl font-bold text-purple-400" id="statBestWriting">-</div>
-              </div>
-            </div>
-            <div class="p-3.5 rounded-xl bg-amber-950/40 border border-amber-700/50 flex justify-between items-center">
-              <div>
-                <span class="text-xs text-amber-300 font-medium">คะแนนรวมสูงสุด (Overall Best)</span>
-                <div class="text-2xl font-black text-amber-400" id="statBestOverall">-</div>
-              </div>
-              <div class="text-right" id="statGapCalculationContainer">
-                <span class="text-xs text-slate-400">รอข้อมูล...</span>
-              </div>
+            <div class="relative flex-1 min-h-[250px] w-full">
+              <canvas id="aeltChart"></canvas>
             </div>
           </div>
-        </div>
-
-        <!-- กราฟแนวโน้ม -->
-        <div class="glass-card p-5 lg:col-span-2 flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-3">
-            <h4 class="text-sm font-semibold text-white flex items-center gap-2">
-              <i class="fa-solid fa-chart-line text-indigo-400"></i> กราฟแนวโน้มคะแนนสอบรายครั้ง (Reading, Writing, Overall)
-            </h4>
-            <span class="text-xs px-2.5 py-1 rounded-full bg-rose-950/80 text-rose-300 font-medium border border-rose-800">เกณฑ์ 62 คะแนน</span>
-          </div>
-          <div class="relative h-64 w-full">
-            <canvas id="aeltChart"></canvas>
-          </div>
-        </div>
       </div>
 
       <div class="glass-card overflow-hidden border border-slate-800">
-        <div class="p-4 border-b border-slate-800 flex justify-between items-center">
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider">ประวัติผลการทดสอบ KKU-AELT ทั้งหมด</h4>
-        </div>
         <div class="overflow-x-auto custom-scrollbar">
           <table class="w-full text-left text-xs">
             <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-800">
               <tr>
-                <th class="py-3 px-4 text-center w-16">ครั้งที่</th>
-                <th class="py-3 px-4 min-w-[110px]">วันที่สอบ</th>
-                <th class="py-3 px-4 text-center">Reading</th>
-                <th class="py-3 px-4 text-center">Reading Band</th>
-                <th class="py-3 px-4 text-center">Writing</th>
-                <th class="py-3 px-4 text-center">Writing Band</th>
-                <th class="py-3 px-4 text-center">คะแนนรวม</th>
-                <th class="py-3 px-4 text-center">Overall Band</th>
-                <th class="py-3 px-4 text-center min-w-[150px]">ผลประเมิน (62)</th>
-                <th class="py-3 px-4 min-w-[180px]">หมายเหตุ</th>
+                <th class="py-3 px-4 text-center">ครั้งที่</th>
+                <th class="py-3 px-4">วันที่สอบ</th>
+                <th class="py-3 px-4 text-center text-cyan-400">Reading</th>
+                <th class="py-3 px-4 text-center text-purple-400">Writing</th>
+                <th class="py-3 px-4 text-center text-amber-400">คะแนนรวม</th>
+                <th class="py-3 px-4 text-center">ประเมินผล</th>
+                <th class="py-3 px-4 text-center">การอบรมแนะนำ</th>
               </tr>
             </thead>
-            <tbody id="aeltTableBody" class="divide-y divide-slate-800">
-              <tr><td colspan="10" class="text-center py-8 text-slate-400">กำลังรอข้อมูล...</td></tr>
-            </tbody>
+            <tbody id="aeltTableBody" class="divide-y divide-slate-800"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: MI-DL TASKS -->
+    <!-- TAB 3: TASKS 6 -->
     <div id="tab3-content" class="tab-panel hidden space-y-4">
-      <div class="glass-card overflow-hidden border border-slate-800">
-        <div class="p-4 border-b border-slate-800 flex justify-between items-center">
-          <div>
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider">รายการแบบจำลองและขั้นตอนการทดลอง (MI-DL-Tasks)</h4>
-          </div>
-          <span class="text-xs px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-mono" id="modelProgressBadge">ความคืบหน้ารวม: 0%</span>
+      <div class="glass-card overflow-hidden border border-slate-800 mt-2">
+        <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider">รายการแบบจำลองและการทดลอง (6 Class)</h4>
         </div>
         <div class="w-full overflow-x-auto custom-scrollbar">
           <table class="w-full text-left text-xs border-collapse">
             <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-800 text-[11px]">
               <tr>
-                <th class="py-3 px-3 w-10 text-center font-semibold">#</th>
-                <th class="py-3 px-4 w-1/4 font-semibold">แบบจำลอง / รายการทดลอง (task_name)</th>
-                <th class="py-3 px-3 w-1/5 font-semibold">ประเภทสถาปัตยกรรม (architecture_type)</th>
-                <th class="py-3 px-3 w-32 text-center font-semibold whitespace-nowrap">สถานะ (status)</th>
-                <th class="py-3 px-3 whitespace-nowrap">% คืบหน้า (progress)</th>
-                <th class="py-3 px-4 font-semibold">หมายเหตุ / พารามิเตอร์ (notes)</th>
+                <th class="py-3 px-3 text-center">#</th>
+                <th class="py-3 px-4 font-semibold">แบบจำลอง (Task Name)</th>
+                <th class="py-3 px-3 font-semibold">ประเภทสถาปัตยกรรม</th>
+                <th class="py-3 px-3 text-center">สถานะ</th>
+                <th class="py-3 px-3">% คืบหน้า</th>
+                <th class="py-3 px-4 font-semibold">หมายเหตุ</th>
               </tr>
             </thead>
-            <tbody id="modelTasksBody" class="divide-y divide-slate-800 text-slate-300">
-              <tr><td colspan="6" class="text-center py-8 text-slate-400">กำลังรอข้อมูล...</td></tr>
-            </tbody>
+            <tbody id="modelTasksBody6" class="divide-y divide-slate-800 text-slate-300"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- TAB 4: MI-DL MODEL EVALUATION (HIGHLIGHT BEST MODEL) -->
+    <!-- TAB 4: TASKS 13 -->
     <div id="tab4-content" class="tab-panel hidden space-y-4">
-      <div class="glass-card overflow-hidden border border-slate-800">
-        <div class="p-4 border-b border-slate-800 flex justify-between items-center">
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider">ผลการประเมินประสิทธิภาพ (MI-DL-Model-Evaluation) <span class="text-emerald-400 font-normal ml-2">(⭐ แถวสีเขียวคือโมเดลที่มีค่าความถูกต้องสูงสุด)</span></h4>
+      <div class="glass-card overflow-hidden border border-slate-800 mt-2">
+        <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider">รายการแบบจำลองและการทดลอง (13 Class)</h4>
         </div>
         <div class="w-full overflow-x-auto custom-scrollbar">
           <table class="w-full text-left text-xs border-collapse">
             <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-800 text-[11px]">
               <tr>
-                <th class="py-3 px-3 font-semibold">Model <span class="block text-[10px] text-slate-400 font-normal">(แบบจำลอง)</span></th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Accuracy (ความถูกต้องรวม / OA)</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Kappa (ค่าความสอดคล้อง)</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Macro F1 (คะแนนสมดุล)</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Precision (ความแม่นยำ)</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Recall (อัตราการตรวจจับ)</th>
-                <th class="py-3 px-2 text-center font-semibold whitespace-nowrap">Training Time (เวลา Training / hs.)</th>
+                <th class="py-3 px-3 text-center">#</th>
+                <th class="py-3 px-4 font-semibold">แบบจำลอง (Task Name)</th>
+                <th class="py-3 px-3 font-semibold">ประเภทสถาปัตยกรรม</th>
+                <th class="py-3 px-3 text-center">สถานะ</th>
+                <th class="py-3 px-3">% คืบหน้า</th>
+                <th class="py-3 px-4 font-semibold">หมายเหตุ</th>
               </tr>
             </thead>
-            <tbody id="evalStatsBody" class="divide-y divide-slate-800 font-mono text-xs">
-              <tr><td colspan="7" class="text-center py-8 text-slate-400">กำลังรอข้อมูล...</td></tr>
-            </tbody>
+            <tbody id="modelTasksBody13" class="divide-y divide-slate-800 text-slate-300"></tbody>
           </table>
         </div>
       </div>
     </div>
 
+    <!-- TAB 5: EVAL 6 -->
+    <div id="tab5-content" class="tab-panel hidden space-y-4">
+      <div class="glass-card overflow-hidden border border-slate-800 mt-2">
+        <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider">ผลประเมินประสิทธิภาพ (6 Class) <span class="text-emerald-400 ml-2 font-normal">(⭐ ไฮไลต์สีเขียวคือโมเดลที่ดีที่สุด)</span></h4>
+        </div>
+        <div class="w-full overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-800 text-[11px]">
+              <tr>
+                <th class="py-3 px-3 font-semibold">Model (แบบจำลอง)</th>
+                <th class="py-3 px-2 text-center">Accuracy (OA)</th>
+                <th class="py-3 px-2 text-center">Kappa</th>
+                <th class="py-3 px-2 text-center">Macro F1</th>
+                <th class="py-3 px-2 text-center">Precision</th>
+                <th class="py-3 px-2 text-center">Recall</th>
+                <th class="py-3 px-2 text-center">Training Time</th>
+              </tr>
+            </thead>
+            <tbody id="evalStatsBody6" class="divide-y divide-slate-800 font-mono text-xs"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: EVAL 13 -->
+    <div id="tab6-content" class="tab-panel hidden space-y-4">
+      <div class="glass-card overflow-hidden border border-slate-800 mt-2">
+        <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider">ผลประเมินประสิทธิภาพ (13 Class) <span class="text-emerald-400 ml-2 font-normal">(⭐ ไฮไลต์สีเขียวคือโมเดลที่ดีที่สุด)</span></h4>
+        </div>
+        <div class="w-full overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead class="bg-slate-900 text-slate-400 uppercase border-b border-slate-800 text-[11px]">
+              <tr>
+                <th class="py-3 px-3 font-semibold">Model (แบบจำลอง)</th>
+                <th class="py-3 px-2 text-center">Accuracy (OA)</th>
+                <th class="py-3 px-2 text-center">Kappa</th>
+                <th class="py-3 px-2 text-center">Macro F1</th>
+                <th class="py-3 px-2 text-center">Precision</th>
+                <th class="py-3 px-2 text-center">Recall</th>
+                <th class="py-3 px-2 text-center">Training Time</th>
+              </tr>
+            </thead>
+            <tbody id="evalStatsBody13" class="divide-y divide-slate-800 font-mono text-xs"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 7: COMPARISON -->
+    <div id="tab7-content" class="tab-panel hidden space-y-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2">
+        <div class="glass-card p-5">
+          <h4 class="text-sm font-bold text-white mb-4"><i class="fa-solid fa-chart-column text-indigo-400 mr-2"></i>เปรียบเทียบ ความถูกต้องรวม (Accuracy / OA)</h4>
+          <div class="relative h-64 w-full"><canvas id="compareAccChart"></canvas></div>
+        </div>
+        <div class="glass-card p-5">
+          <h4 class="text-sm font-bold text-white mb-4"><i class="fa-solid fa-chart-bar text-emerald-400 mr-2"></i>เปรียบเทียบ คะแนนสมดุล (Macro F1-Score)</h4>
+          <div class="relative h-64 w-full"><canvas id="compareF1Chart"></canvas></div>
+        </div>
+      </div>
+      <div class="glass-card overflow-hidden border border-slate-800">
+        <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider">ตารางเปรียบเทียบประสิทธิภาพเชิงลึก (6 Class vs 13 Class)</h4>
+        </div>
+        <div class="w-full overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead class="bg-slate-900 text-slate-400 border-b border-slate-800 text-[11px]">
+              <tr>
+                <th class="py-3 px-3 font-semibold uppercase" rowspan="2">Model</th>
+                <th class="py-3 px-2 text-center font-semibold border-l border-slate-800 uppercase" colspan="3">Accuracy (OA)</th>
+                <th class="py-3 px-2 text-center font-semibold border-l border-slate-800 uppercase" colspan="3">Macro F1</th>
+              </tr>
+              <tr class="border-t border-slate-800">
+                <th class="py-2 px-2 text-center text-indigo-300 border-l border-slate-800">6 Class</th>
+                <th class="py-2 px-2 text-center text-emerald-300">13 Class</th>
+                <th class="py-2 px-2 text-center text-amber-300">Δ Diff</th>
+                <th class="py-2 px-2 text-center text-indigo-300 border-l border-slate-800">6 Class</th>
+                <th class="py-2 px-2 text-center text-emerald-300">13 Class</th>
+                <th class="py-2 px-2 text-center text-amber-300">Δ Diff</th>
+              </tr>
+            </thead>
+            <tbody id="comparisonTableBody" class="divide-y divide-slate-800 font-mono text-[11.5px]"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <div id="toastBox" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300">
-    <div class="bg-slate-800 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 text-xs border border-slate-700">
-      <i class="fa-solid fa-circle-check text-emerald-400 text-base flex-shrink-0"></i>
-      <span id="toastMsg">ดำเนินการสำเร็จ</span>
-    </div>
-  </div>
-
-  <footer class="border-t border-slate-800/80 bg-slate-950 py-3 text-center text-xs text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-slate-950 py-3 text-center text-xs text-slate-500 mt-4">
     <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
       <div>Ph.D. Dissertation Tracking System &bull; Khon Kaen University</div>
-      <div>Auto Sync ทุก 1 นาที (Best Model Highlighting Engine)</div>
+      <div>Auto Sync ทุก 1 นาที (Ultra-Fast Concurrent Engine)</div>
     </div>
   </footer>
 
-  <!-- ================= JAVASCRIPT HIGHLIGHT ENGINE ================= -->
   <script>
     const PASSING_CRITERIA = 62;
-    const SHEET_ID = '1otMbL4H8xBOF-E7ZnK8w1uHpSqwna1gpXKI35PkU0J4';
+    const SHEET_ID = '1otMbL4H8xBOF-E7ZnK8w1uHpSqwna1gpXKI35PkU0J4'; 
     
-    const TAB_NAMES = {
-      sheet1: 'data-preparation',
-      sheet2: 'KKU-AELT-score',
-      sheet3: 'MI-DL-Tasks',
-      sheet4: 'MI-DL-Model-Evaluation'
-    };
-
+    const TAB_CONFIGS = [
+      { id: 0, names: ['data-preparation'], expected: 'category', useHeader: true },
+      { id: 1, names: ['KKU-AELT-score'], expected: 'reading', useHeader: true },
+      { id: 2, names: ['MI-DL-Tasks (6 Class)', 'MI-DL-Tasks (6 Class'], expected: 'architecture', useHeader: true },
+      { id: 3, names: ['MI-DL-Tasks (13 Class)', 'MI-DL-Tasks (13 Clas'], expected: 'architecture', useHeader: true },
+      { id: 4, names: ['MI-DL-Model-Evaluation (6 Class)', 'MI-DL-Model-Evaluation (6 Class'], expected: 'kappa', useHeader: true },
+      { id: 5, names: ['MI-DL-Model-Evaluation (13 Class)', 'MI-DL-Model-Evaluation (13 Clas'], expected: 'kappa', useHeader: true },
+      { id: 6, names: ['MI-DL-Model-Comparison', 'MI-DL-Model-Comparision'], expected: 'comparison', useHeader: false }
+    ];
+    
     let aeltChartInstance = null;
+    let compareAccChartInstance = null;
+    let compareF1ChartInstance = null;
     let syncTimer = null;
     let countdownTimer = null;
     let nextCountdown = 60;
     let isFetching = false;
+    let appData = { sheet1: [], sheet2: [], sheet3: [], sheet4: [], sheet5: [], sheet6: [], sheet7: [] };
 
-    let appData = {
-      sheet1: [],
-      sheet2: [],
-      sheet3_tasks: [],
-      sheet3_stats: []
-    };
-
-    async function fetchCSV(tabName) {
-      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tabName)}&_t=${Date.now()}`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const text = await res.text();
-      if (text.includes('<!DOCTYPE html>') || text.includes('accounts.google.com')) {
-        throw new Error('ติดสิทธิ์ Google Workspace หรือยังไม่ได้ Publish to web');
-      }
-      const parsed = Papa.parse(text, { header: true, skipEmptyLines: 'greedy' });
-      return parsed.data;
+    function parseMetric(val) {
+      if (val === undefined || val === null || val === '-' || val === '') return 0;
+      let s = String(val).replace('%', '').trim();
+      let n = parseFloat(s);
+      if (isNaN(n)) return 0;
+      if (Math.abs(n) > 0 && Math.abs(n) <= 1.0) n = n * 100; 
+      return Math.round(n * 100) / 100;
     }
 
-    async function triggerLiveSync(isManual = false) {
-      if (isFetching) return;
-      isFetching = true;
-
-      const icon = document.getElementById('syncIcon');
-      const liveText = document.getElementById('liveStatusText');
-      if (icon) icon.classList.add('spinning');
-      if (liveText) liveText.innerText = 'กำลังซิงค์...';
-
-      let successCount = 0;
-
-      // 1. Sheet 1: data-preparation
-      try {
-        const rows1 = await fetchCSV(TAB_NAMES.sheet1);
-        if (rows1 && rows1.length > 0) {
-          appData.sheet1 = rows1.filter(r => r.id || r.task_description).map((r, idx) => ({
-            id: r.id || (idx + 1),
-            title: r.task_description || '-',
-            category: r.category || '-',
-            startDate: r.start_date || '-',
-            endDate: r.end_date || '-',
-            status: r.status || 'Not Started',
-            progress: parseProgress(r.progress),
-            notes: r.notes || '-'
-          }));
-          successCount++;
-        }
-      } catch (e1) { console.warn('Sheet 1 failed:', e1); }
-
-      // 2. Sheet 2: KKU-AELT-score
-      try {
-        const rows2 = await fetchCSV(TAB_NAMES.sheet2);
-        if (rows2 && rows2.length > 0) {
-          appData.sheet2 = rows2.filter(r => r.attempt).map((r, idx) => ({
-            attempt: r.attempt || (idx + 1),
-            date: r.exam_date || '-',
-            reading: parseNum(r.reading_score),
-            rBand: r.reading_band || '-',
-            writing: parseNum(r.writing_score),
-            wBand: r.writing_band || '-',
-            overall: parseNum(r.overall_score),
-            oBand: r.overall_band || '-',
-            eval: r.evaluation || '-',
-            remark: r.remark || '-'
-          }));
-          successCount++;
-        }
-      } catch (e2) { console.warn('Sheet 2 failed:', e2); }
-
-      // 3. Sheet 3: MI-DL-Tasks
-      try {
-        const rows3 = await fetchCSV(TAB_NAMES.sheet3);
-        if (rows3 && rows3.length > 0) {
-          appData.sheet3_tasks = rows3.filter(r => r.id || r.task_name).map((r, idx) => ({
-            id: r.id || (idx + 1),
-            title: r.task_name || '-',
-            type: r.architecture_type || '-',
-            status: r.status || 'Not Started',
-            progress: parseProgress(r.progress),
-            notes: r.notes || '-'
-          }));
-          successCount++;
-        }
-      } catch (e3) { console.warn('Sheet 3 failed:', e3); }
-
-      // 4. Sheet 4: MI-DL-Model-Evaluation
-      try {
-        const rows4 = await fetchCSV(TAB_NAMES.sheet4);
-        if (rows4 && rows4.length > 0) {
-          appData.sheet3_stats = rows4.filter(r => r.model_name).map((r, idx) => {
-            let timeVal = '-';
-            for (let key in r) {
-              if (key.toLowerCase().includes('time') || key.toLowerCase().includes('hs') || key.toLowerCase().includes('เวลา')) {
-                timeVal = r[key];
-              }
-            }
-            // แปลงค่า accuracy เป็นตัวเลขเพื่อใช้วัดค่าสูงสุด
-            let rawAcc = r.accuracy || '0';
-            let accNum = parseFloat(String(rawAcc).replace('%', '').trim());
-            if (!isNaN(accNum) && accNum > 0 && accNum <= 1.0) accNum = accNum * 100;
-
-            return {
-              model: r.model_name || `Model ${idx+1}`,
-              oa: rawAcc,
-              oaNum: isNaN(accNum) ? 0 : accNum,
-              kappa: parseNum(r.kappa),
-              f1: r.macro_f1 || r.f1_score || '0.0%',
-              precision: r.macro_precision || r.precision || '0.0%',
-              recall: r.macro_recall || r.recall || '0.0%',
-              time: parseNum(timeVal)
-            };
-          });
-          successCount++;
-        }
-      } catch (e4) { console.warn('Sheet 4 failed:', e4); }
-
-      isFetching = false;
-      if (icon) icon.classList.remove('spinning');
-      nextCountdown = 60;
-
-      if (successCount > 0) {
-        document.getElementById('connectionErrorBanner').classList.add('hidden');
-        updateSyncStatusUI(true, `ซิงค์ออนไลน์สำเร็จ (${successCount}/4 ชีต)`);
-        if (isManual) showToast(`ซิงค์ข้อมูล Database สำเร็จ (${successCount}/4 ชีต)`);
-        renderAll();
-      } else {
-        updateSyncStatusUI(false, 'ยังไม่สามารถดึงข้อมูลได้');
-        document.getElementById('connectionErrorBanner').classList.remove('hidden');
-        if (isManual) showToast('เชื่อมต่อไม่สำเร็จ โปรดตรวจสอบการ Publish to Web ทุกแท็บ');
-      }
+    function parseNum(val) {
+      if (val === undefined || val === null || val === '' || val === '-') return '-';
+      let n = Number(val);
+      return isNaN(n) ? val : n;
     }
 
     function parseProgress(val) {
@@ -655,224 +451,416 @@
       return Math.round(n * 10) / 10;
     }
 
-    function parseNum(val) {
-      if (val === undefined || val === null || val === '' || val === '-') return '-';
-      let n = Number(val);
-      return isNaN(n) ? val : n;
+    function findKey(obj, possibleKeys) {
+        const keys = Object.keys(obj);
+        for (let pk of possibleKeys) {
+            let target = pk.toLowerCase().replace(/\s+/g, '');
+            let match = keys.find(k => k.toLowerCase().replace(/\s+/g, '').includes(target));
+            if (match && obj[match] !== undefined && obj[match] !== '') return obj[match];
+        }
+        return undefined;
+    }
+
+    // ประเมินผลผ่าน/ไม่ผ่าน อิงประกาศ มข. 7-Band
+    function evaluateAeltLevel(overallScore) {
+      let band = 0;
+      if(overallScore >= 62) band = 5;
+      else if(overallScore >= 50) band = 4;
+      else if(overallScore >= 38) band = 3;
+      else if(overallScore >= 26) band = 2;
+      else if(overallScore > 0) band = 1;
+
+      if(band >= 5) {
+          return {
+              evalText: 'ผ่านเกณฑ์ (Pass)',
+              evalClass: 'bg-emerald-950 text-emerald-300 border border-emerald-800',
+              trainingText: '<span class="text-emerald-400">ไม่จำเป็น (ผ่านแล้ว)</span>'
+          };
+      } else if (band === 4) {
+          return {
+              evalText: 'ไม่ผ่าน (Band 4)',
+              evalClass: 'bg-amber-950 text-amber-300 border border-amber-800',
+              trainingText: '<span class="text-amber-400">อบรม Course II</span>'
+          };
+      } else {
+          return {
+              evalText: `ไม่ผ่าน (Band ${band})`,
+              evalClass: 'bg-rose-950 text-rose-300 border border-rose-800',
+              trainingText: '<span class="text-rose-400">อบรม Course I & II</span>'
+          };
+      }
+    }
+
+    function assignToApp(index, data) {
+      if (!data || data.length === 0) return;
+      let cleanedData = data;
+      
+      if (index !== 6) {
+        cleanedData = data.map(r => {
+          const obj = {};
+          for (let k in r) obj[k.trim().toLowerCase()] = r[k];
+          return obj;
+        });
+      }
+
+      if (index === 0) {
+        appData.sheet1 = cleanedData.map(r => ({
+          id: findKey(r, ['id', 'ลำดับ']) || '-', 
+          title: findKey(r, ['task', 'description', 'รายการ']) || '-', 
+          category: findKey(r, ['category', 'หมวด']) || '-', 
+          startDate: findKey(r, ['start', 'เริ่มต้น']) || '-', 
+          endDate: findKey(r, ['end', 'สิ้นสุด']) || '-', 
+          status: findKey(r, ['status', 'สถานะ']) || '-', 
+          progress: parseProgress(findKey(r, ['progress', 'คืบหน้า'])), 
+          notes: findKey(r, ['notes', 'หมายเหตุ']) || '-'
+        })).filter(r => r.id !== '-');
+      } else if (index === 1) {
+        appData.sheet2 = cleanedData.map(r => ({
+          attempt: findKey(r, ['attempt', 'ครั้ง']), 
+          date: findKey(r, ['date', 'วันที่']) || '-', 
+          reading: parseNum(findKey(r, ['reading'])), 
+          writing: parseNum(findKey(r, ['writing'])), 
+          overall: parseNum(findKey(r, ['overall', 'รวม']))
+        })).filter(r => r.attempt);
+      } else if (index === 2 || index === 3) {
+        const target = index === 2 ? 'sheet3' : 'sheet4';
+        appData[target] = cleanedData.map(r => ({
+          id: findKey(r, ['id']) || '-', 
+          title: findKey(r, ['task', 'name', 'จำลอง']) || '-', 
+          type: findKey(r, ['architecture', 'ประเภท']) || '-',
+          status: findKey(r, ['status']) || '-', 
+          progress: parseProgress(findKey(r, ['progress'])), 
+          notes: findKey(r, ['note']) || '-'
+        })).filter(r => r.id !== '-');
+      } else if (index === 4 || index === 5) {
+        const target = index === 4 ? 'sheet5' : 'sheet6';
+        appData[target] = cleanedData.map(r => {
+          let model = findKey(r, ['model_name', 'model', 'แบบจำลอง']);
+          if (!model) return null;
+          let accRaw = findKey(r, ['accuracy', 'oa', 'acc']);
+          let timeVal = findKey(r, ['time', 'hs', 'เวลา']);
+          return {
+            model: model,
+            oa: accRaw || '0.0%', oaNum: parseMetric(accRaw),
+            kappa: parseMetric(findKey(r, ['kappa'])),
+            f1Num: parseMetric(findKey(r, ['macro_f1', 'f1'])),
+            precision: parseMetric(findKey(r, ['precision'])),
+            recall: parseMetric(findKey(r, ['recall'])),
+            time: parseNum(timeVal)
+          };
+        }).filter(r => r !== null);
+      } else if (index === 6) {
+        let startIndex = data.findIndex(r => Object.values(r).join('').toLowerCase().includes('model name'));
+        if (startIndex === -1) startIndex = 2;
+        const rawSheet7 = data.slice(startIndex + 1);
+        
+        appData.sheet7 = rawSheet7.filter(r => r[1] && r[1].trim() !== '' && !r[1].toLowerCase().includes('model')).map(r => ({
+          model: r[1], acc6: parseMetric(r[3]), acc13: parseMetric(r[4]), accDelta: parseMetric(r[5]),
+          kappa6: parseMetric(r[6]), kappa13: parseMetric(r[7]), kappaDelta: parseMetric(r[8]),
+          f1_6: parseMetric(r[9]), f1_13: parseMetric(r[10]), f1Delta: parseMetric(r[11])
+        }));
+      }
+    }
+
+    async function triggerLiveSync(isManual = false) {
+      if (isFetching) return;
+      isFetching = true;
+      const icon = document.getElementById('syncIcon');
+      if (icon) icon.classList.add('spinning');
+      document.getElementById('liveStatusText').innerText = 'กำลังซิงค์...';
+
+      const fetchPromises = TAB_CONFIGS.map(async (config) => {
+        for (let name of config.names) {
+            try {
+                let url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(name)}&_t=${Date.now()}`;
+                let res = await fetch(url);
+                let text = await res.text();
+                let parsed = Papa.parse(text, { header: config.useHeader, skipEmptyLines: 'greedy' });
+                
+                if (parsed.data && parsed.data.length > 0) {
+                    let keysStr = config.useHeader 
+                        ? Object.keys(parsed.data[0]).join('').toLowerCase() 
+                        : parsed.data.map(r => Object.values(r).join('')).join('').toLowerCase();
+                    
+                    if (keysStr.includes(config.expected)) {
+                        assignToApp(config.id, parsed.data);
+                        return 1;
+                    }
+                }
+            } catch (e) { }
+        }
+        return 0;
+      });
+
+      const results = await Promise.all(fetchPromises);
+      const successCount = results.reduce((a, b) => a + b, 0);
+
+      isFetching = false;
+      if (icon) icon.classList.remove('spinning');
+      nextCountdown = 60;
+      document.getElementById('lastSyncTimeText').innerText = new Date().toLocaleTimeString('th-TH');
+
+      if (successCount > 0) {
+        document.getElementById('liveStatusDot').className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 badge-pulse mr-2';
+        document.getElementById('liveStatusText').innerText = `ดึงสำเร็จแบบขนาน (${successCount}/7 ชีต)`;
+        renderAll();
+      } else {
+        document.getElementById('liveStatusDot').className = 'w-2.5 h-2.5 rounded-full bg-rose-500 mr-2';
+        document.getElementById('liveStatusText').innerText = 'ล้มเหลว';
+      }
     }
 
     function renderAll() {
-      renderOverviewKPIs();
+      renderKPIs();
       renderDataPrepTable();
       renderAeltSection();
-      renderModelTasksTable();
-      renderEvalStatsTable();
+      renderModelTasksTable(3, 'modelTasksBody6');
+      renderModelTasksTable(4, 'modelTasksBody13');
+      renderEvalStatsTable(5, 'evalStatsBody6');
+      renderEvalStatsTable(6, 'evalStatsBody13');
+      renderComparisonTable();
+      renderComparisonCharts();
     }
 
-    function renderOverviewKPIs() {
-      // 1. Data Prep Progress
-      const tasks1 = appData.sheet1 || [];
-      let avgProg1 = 0;
-      if (tasks1.length > 0) {
-        const done1 = tasks1.filter(t => t.status === 'Success' || t.progress >= 100).length;
-        const inProg1 = tasks1.filter(t => t.status === 'In progress' || (t.progress > 0 && t.progress < 100)).length;
-        avgProg1 = tasks1.reduce((s, t) => s + (Number(t.progress) || 0), 0) / tasks1.length;
+    function renderKPIs() {
+      let prog1 = 0;
+      if (appData.sheet1.length > 0) {
+        prog1 = appData.sheet1.reduce((s, t) => s + (Number(t.progress)||0), 0) / appData.sheet1.length;
+        document.getElementById('kpiDataPrepProg').innerText = `${prog1.toFixed(1)}%`;
+        document.getElementById('kpiDataPrepBar').style.width = `${Math.min(100, prog1)}%`;
+      }
+      
+      let prog3 = 0, prog4 = 0;
+      if (appData.sheet3.length > 0) prog3 = appData.sheet3.reduce((s, t) => s + (Number(t.progress)||0), 0) / appData.sheet3.length;
+      if (appData.sheet4.length > 0) prog4 = appData.sheet4.reduce((s, t) => s + (Number(t.progress)||0), 0) / appData.sheet4.length;
 
-        document.getElementById('kpiDataPrepProg').innerText = `${avgProg1.toFixed(1)}%`;
-        document.getElementById('kpiDataPrepBar').style.width = `${Math.min(100, avgProg1)}%`;
-        document.getElementById('kpiDataDone').innerText = done1;
-        document.getElementById('kpiDataTotal').innerText = tasks1.length;
-        document.getElementById('kpiDataInProgress').innerText = `ทำ ${inProg1}`;
-        document.getElementById('tab1AvgBadge').innerText = `${avgProg1.toFixed(1)}%`;
+      const overall = (prog1 + prog3 + prog4) / 3;
+      document.getElementById('kpiOverallResearchProg').innerText = `${overall.toFixed(1)}%`;
+      document.getElementById('kpiOverallResearchBar').style.width = `${Math.min(100, overall)}%`;
+
+      if (appData.sheet2.length > 0) {
+        const validScores = appData.sheet2.filter(r => typeof r.overall === 'number' && !isNaN(r.overall));
+        if (validScores.length > 0) {
+          const best = Math.max(...validScores.map(r => r.overall));
+          document.getElementById('kpiAeltBest').innerHTML = `${best} <span class="text-xs font-normal text-slate-400">/ ${PASSING_CRITERIA}</span>`;
+          document.getElementById('kpiAeltBar').style.width = `${Math.min(100, Math.round((best/PASSING_CRITERIA)*100))}%`;
+        }
       }
 
-      // 2. MI-DL Tasks Progress
-      const tasks3 = appData.sheet3_tasks || [];
-      let avgProg3 = 0;
-      if (tasks3.length > 0) {
-        const done3 = tasks3.filter(t => t.status === 'Success' || t.progress >= 100).length;
-        avgProg3 = tasks3.reduce((s, t) => s + (Number(t.progress) || 0), 0) / tasks3.length;
-
-        document.getElementById('kpiModelProg').innerText = `${avgProg3.toFixed(1)}%`;
-        document.getElementById('kpiModelBar').style.width = `${Math.min(100, avgProg3)}%`;
-        document.getElementById('kpiModelDone').innerText = done3;
-        document.getElementById('kpiModelTotal').innerText = tasks3.length;
-        document.getElementById('modelProgressBadge').innerText = `ความคืบหน้ารวม: ${avgProg3.toFixed(1)}%`;
+      if (appData.sheet5.length > 0) {
+        let best6 = [...appData.sheet5].sort((a,b) => b.oaNum - a.oaNum)[0];
+        if (best6) {
+            document.getElementById('kpiBestOa6').innerText = `${best6.oaNum.toFixed(2)}%`;
+            document.getElementById('kpiBestOa6Model').innerText = best6.model;
+        }
       }
-
-      // 3. Overall Research Progress
-      const overallResearchProg = (avgProg1 + avgProg3) / 2;
-      document.getElementById('kpiOverallResearchProg').innerText = `${overallResearchProg.toFixed(1)}%`;
-      document.getElementById('kpiOverallResearchBar').style.width = `${Math.min(100, overallResearchProg)}%`;
-
-      // 4. Overall Accuracy (OA) Summary from Sheet 4
-      const stats = appData.sheet3_stats || [];
-      const proposedModel = stats.find(s => s.model && s.model.toLowerCase().includes('mi-dl'));
-      const baselineModels = stats.filter(s => s.model && !s.model.toLowerCase().includes('mi-dl'));
-
-      if (proposedModel) {
-        document.getElementById('kpiProposedOA').innerText = proposedModel.oa !== undefined && proposedModel.oa !== '-' ? proposedModel.oa : '0.0%';
-      }
-
-      if (baselineModels.length > 0) {
-        let bestBase = baselineModels[0];
-        document.getElementById('kpiBestBaselineOA').innerText = `${bestBase.model}: ${bestBase.oa}`;
-      } else {
-        document.getElementById('kpiBestBaselineOA').innerText = '-';
+      if (appData.sheet6.length > 0) {
+        let best13 = [...appData.sheet6].sort((a,b) => b.oaNum - a.oaNum)[0];
+        if (best13) {
+            document.getElementById('kpiBestOa13').innerText = `${best13.oaNum.toFixed(2)}%`;
+            document.getElementById('kpiBestOa13Model').innerText = best13.model;
+        }
       }
     }
 
     function renderDataPrepTable() {
       const tbody = document.getElementById('dataPrepTableBody');
-      const search = document.getElementById('taskSearch').value.toLowerCase();
-      const cat = document.getElementById('categoryFilter').value;
-      if (!appData.sheet1 || appData.sheet1.length === 0) return;
-
-      const catSelect = document.getElementById('categoryFilter');
-      const uniqueCats = [...new Set(appData.sheet1.map(t => t.category).filter(c => c && c !== '-'))];
-      if (catSelect.options.length <= 1 && uniqueCats.length > 0) {
-        uniqueCats.forEach(c => {
-          const opt = document.createElement('option');
-          opt.value = c; opt.innerText = c; catSelect.appendChild(opt);
-        });
-      }
-
-      const filtered = appData.sheet1.filter(item => {
-        const matchesSearch = item.title.toLowerCase().includes(search) || item.notes.toLowerCase().includes(search);
-        const matchesCat = (cat === 'ALL') || item.category.includes(cat);
-        return matchesSearch && matchesCat;
-      });
-
-      tbody.innerHTML = filtered.map(item => `
-        <tr class="hover:bg-slate-800/50 transition">
-          <td class="py-2.5 px-3 text-center font-mono text-slate-500 text-xs">${item.id}</td>
-          <td class="py-2.5 px-3 font-medium text-slate-200 text-xs">${item.title}</td>
-          <td class="py-2.5 px-3 text-slate-300 text-xs">${item.category}</td>
-          <td class="py-2.5 px-2 text-center font-mono text-xs text-slate-400">${item.startDate}</td>
-          <td class="py-2.5 px-2 text-center font-mono text-xs text-slate-400">${item.endDate}</td>
-          <td class="py-2.5 px-2 text-center whitespace-nowrap"><span class="px-2 py-0.5 rounded-full text-xs font-semibold whitespace-nowrap inline-block ${item.status === 'Success' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-amber-950 text-amber-300 border border-amber-800'}">${item.status}</span></td>
-          <td class="py-2.5 px-3 font-mono text-xs text-slate-300">${item.progress}%</td>
-          <td class="py-2.5 px-3 text-slate-400 text-xs">${item.notes}</td>
+      if (!appData.sheet1 || appData.sheet1.length === 0) { tbody.innerHTML = ''; return; }
+      tbody.innerHTML = appData.sheet1.map(item => `
+        <tr class="hover:bg-slate-800/50 transition border-b border-slate-800/50">
+          <td class="py-2.5 px-3 text-center font-mono text-slate-500">${item.id}</td>
+          <td class="py-2.5 px-3 font-medium text-slate-200">${item.title}</td>
+          <td class="py-2.5 px-3 text-slate-400">${item.category}</td>
+          <td class="py-2.5 px-2 text-center font-mono text-slate-400 whitespace-nowrap">${item.startDate}</td>
+          <td class="py-2.5 px-2 text-center font-mono text-slate-400 whitespace-nowrap">${item.endDate}</td>
+          <td class="py-2.5 px-2 text-center">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${item.status.toLowerCase().includes('success') ? 'bg-emerald-950 text-emerald-300' : 'bg-amber-950 text-amber-300'}">${item.status}</span>
+          </td>
+          <td class="py-2.5 px-3 font-mono text-slate-300 whitespace-nowrap">${item.progress}%</td>
+          <td class="py-2.5 px-3 text-slate-400">${item.notes}</td>
         </tr>
       `).join('');
     }
 
     function renderAeltSection() {
-      if (!appData.sheet2 || appData.sheet2.length === 0) return;
-      const validScores = appData.sheet2.filter(r => typeof r.overall === 'number' && !isNaN(r.overall));
-      if (validScores.length === 0) return;
-
-      const bestOverall = Math.max(...validScores.map(r => r.overall));
-      const bestReading = Math.max(...validScores.map(r => typeof r.reading === 'number' ? r.reading : 0));
-      const bestWriting = Math.max(...validScores.map(r => typeof r.writing === 'number' ? r.writing : 0));
-      const gap = PASSING_CRITERIA - bestOverall;
-
-      document.getElementById('kpiAeltBest').innerHTML = `${bestOverall} <span class="text-xs font-normal text-slate-400">/ ${PASSING_CRITERIA}</span>`;
-      document.getElementById('kpiAeltBar').style.width = `${Math.min(100, Math.round((bestOverall / PASSING_CRITERIA) * 100))}%`;
-      document.getElementById('kpiAeltCount').innerText = validScores.length;
-      document.getElementById('kpiAeltGapBadge').innerText = gap <= 0 ? 'ผ่านเกณฑ์แล้ว' : `ขาดอีก ${gap.toFixed(1)} สู่เกณฑ์ 62`;
-      document.getElementById('statBestReading').innerText = bestReading;
-      document.getElementById('statBestWriting').innerText = bestWriting;
-      document.getElementById('statBestOverall').innerText = bestOverall;
-      document.getElementById('statGapCalculationContainer').innerHTML = gap <= 0 ? '<span class="text-emerald-400 font-bold">ผ่านเกณฑ์แล้ว</span>' : `<span class="text-amber-300 font-bold">ขาดอีก ${gap.toFixed(1)} คะแนน</span>`;
-
       const tbody = document.getElementById('aeltTableBody');
-      tbody.innerHTML = appData.sheet2.map(row => `
-        <tr class="hover:bg-slate-800/50 transition">
+      if (!appData.sheet2 || appData.sheet2.length === 0) return;
+      
+      // คำนวณสรุปสถิติสำหรับกล่องด้านซ้าย
+      let maxReading = 0, maxReadingAttempt = '-';
+      let maxWriting = 0, maxWritingAttempt = '-';
+      let maxOverall = 0;
+
+      appData.sheet2.forEach(r => {
+          if (r.reading !== '-' && r.reading > maxReading) { maxReading = r.reading; maxReadingAttempt = r.attempt; }
+          if (r.writing !== '-' && r.writing > maxWriting) { maxWriting = r.writing; maxWritingAttempt = r.attempt; }
+          if (r.overall !== '-' && r.overall > maxOverall) { maxOverall = r.overall; }
+      });
+
+      document.getElementById('summaryReadingScore').innerText = maxReading;
+      document.getElementById('summaryReadingAttempt').innerText = maxReadingAttempt;
+      document.getElementById('summaryWritingScore').innerText = maxWriting;
+      document.getElementById('summaryWritingAttempt').innerText = maxWritingAttempt;
+      document.getElementById('summaryOverallScore').innerText = maxOverall;
+
+      const finalEval = evaluateAeltLevel(maxOverall);
+      const evalBox = document.getElementById('summaryEvalStatus');
+      evalBox.className = `p-3 rounded-lg text-center font-bold text-sm shadow-md ${finalEval.evalClass}`;
+      evalBox.innerHTML = finalEval.evalText;
+      document.getElementById('summaryEvalTraining').innerHTML = `คำแนะนำ: ${finalEval.trainingText}`;
+
+      tbody.innerHTML = appData.sheet2.map(row => {
+        const evalData = evaluateAeltLevel(row.overall);
+        return `
+        <tr class="hover:bg-slate-800/50 transition border-b border-slate-800/50">
           <td class="py-2.5 px-4 text-center font-bold text-slate-300">${row.attempt}</td>
-          <td class="py-2.5 px-4 font-mono text-slate-300 text-xs">${row.date}</td>
-          <td class="py-2.5 px-4 text-center text-cyan-400 font-semibold">${row.reading}</td>
-          <td class="py-2.5 px-4 text-center text-slate-400">Band ${row.rBand}</td>
-          <td class="py-2.5 px-4 text-center text-purple-400 font-semibold">${row.writing}</td>
-          <td class="py-2.5 px-4 text-center text-slate-400">Band ${row.wBand}</td>
+          <td class="py-2.5 px-4 font-mono text-slate-400">${row.date}</td>
+          <td class="py-2.5 px-4 text-center text-cyan-400">${row.reading}</td>
+          <td class="py-2.5 px-4 text-center text-purple-400">${row.writing}</td>
           <td class="py-2.5 px-4 text-center font-bold text-amber-400">${row.overall}</td>
-          <td class="py-2.5 px-4 text-center text-slate-400">Band ${row.oBand}</td>
-          <td class="py-2.5 px-4 text-center whitespace-nowrap"><span class="px-2 py-0.5 rounded text-xs whitespace-nowrap inline-block ${row.overall >= PASSING_CRITERIA ? 'bg-emerald-950 text-emerald-300' : 'bg-rose-950 text-rose-300'}">${row.eval}</span></td>
-          <td class="py-2.5 px-4 text-slate-400 text-xs">${row.remark}</td>
+          <td class="py-2.5 px-4 text-center"><span class="px-2 py-0.5 rounded text-[10px] ${evalData.evalClass}">${evalData.evalText}</span></td>
+          <td class="py-2.5 px-4 text-center text-[11px] font-medium">${evalData.trainingText}</td>
         </tr>
-      `).join('');
+        `;
+      }).join('');
 
-      renderAeltChart(appData.sheet2);
-    }
-
-    function renderAeltChart(allScores) {
-      const canvas = document.getElementById('aeltChart');
-      if (!canvas || !allScores || allScores.length === 0) return;
-      const ctx = canvas.getContext('2d');
-
-      const labels = allScores.map(r => `ครั้งที่ ${r.attempt}`);
-      const readings = allScores.map(r => typeof r.reading === 'number' ? r.reading : null);
-      const writings = allScores.map(r => typeof r.writing === 'number' ? r.writing : null);
-      const overalls = allScores.map(r => typeof r.overall === 'number' ? r.overall : null);
-      const targets = allScores.map(() => PASSING_CRITERIA);
+      const ctx = document.getElementById('aeltChart').getContext('2d');
+      const labels = appData.sheet2.map(r => `Attempt ${r.attempt}`);
+      const readings = appData.sheet2.map(r => r.reading !== '-' ? r.reading : null);
+      const writings = appData.sheet2.map(r => r.writing !== '-' ? r.writing : null);
+      const overalls = appData.sheet2.map(r => r.overall !== '-' ? r.overall : null);
+      const targets = appData.sheet2.map(() => PASSING_CRITERIA);
 
       if (aeltChartInstance) aeltChartInstance.destroy();
+      Chart.defaults.color = '#94a3b8'; Chart.defaults.font.family = 'Kanit';
       aeltChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
           labels: labels,
           datasets: [
-            { label: 'เกณฑ์ 62', data: targets, borderColor: '#ef4444', borderDash: [5,5], borderWidth: 2, pointRadius: 0, fill: false },
-            { label: 'Reading สูงสุด', data: readings, borderColor: '#22d3ee', backgroundColor: 'rgba(34, 211, 238, 0.1)', borderWidth: 2.5, tension: 0.3, pointBackgroundColor: '#22d3ee', spanGaps: true },
-            { label: 'Writing สูงสุด', data: writings, borderColor: '#c084fc', backgroundColor: 'rgba(192, 132, 252, 0.1)', borderWidth: 2.5, tension: 0.3, pointBackgroundColor: '#c084fc', spanGaps: true },
-            { label: 'คะแนนรวม (Overall)', data: overalls, borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.15)', borderWidth: 3, fill: true, tension: 0.3, pointBackgroundColor: '#fbbf24', pointRadius: 5, spanGaps: true }
+            { label: 'เกณฑ์ 62', data: targets, borderColor: '#ef4444', borderDash: [5,5], borderWidth: 2, pointRadius: 0 },
+            { label: 'Reading', data: readings, borderColor: '#22d3ee', backgroundColor: 'rgba(34, 211, 238, 0.1)', borderWidth: 2.5, tension: 0.3, pointBackgroundColor: '#22d3ee', spanGaps: true },
+            { label: 'Writing', data: writings, borderColor: '#c084fc', backgroundColor: 'rgba(192, 132, 252, 0.1)', borderWidth: 2.5, tension: 0.3, pointBackgroundColor: '#c084fc', spanGaps: true },
+            { label: 'คะแนนรวม (Overall)', data: overalls, borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.15)', borderWidth: 3, fill: true, tension: 0.3, pointBackgroundColor: '#fbbf24', spanGaps: true }
           ]
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { labels: { color: '#94a3b8', font: { family: 'Kanit', size: 11 } } } },
-          scales: {
-            y: { min: 0, max: 75, ticks: { color: '#64748b', font: { family: 'Kanit' } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-            x: { ticks: { color: '#94a3b8', font: { family: 'Kanit' } }, grid: { color: 'rgba(255,255,255,0.05)' } }
-          }
-        }
+        options: { responsive: true, maintainAspectRatio: false, plugins:{ legend: { display: false } }, scales: { y: { min: 0, max: 75, grid: { color: '#1e293b' } }, x: { grid: { display: false } } } }
       });
     }
 
-    function renderModelTasksTable() {
-      const tbody = document.getElementById('modelTasksBody');
-      if (!appData.sheet3_tasks || appData.sheet3_tasks.length === 0) return;
-      tbody.innerHTML = appData.sheet3_tasks.map(item => `
-        <tr class="hover:bg-slate-800/50 transition">
-          <td class="py-3 px-3 text-center font-mono text-slate-500 text-xs">${item.id}</td>
-          <td class="py-3 px-4 font-semibold text-slate-200 text-xs">${item.title}</td>
-          <td class="py-3 px-3 text-xs text-indigo-300 font-mono">${item.type}</td>
-          <td class="py-3 px-3 text-center whitespace-nowrap"><span class="px-3 py-1 rounded-full text-xs bg-slate-800 text-slate-300 whitespace-nowrap inline-block">${item.status}</span></td>
-          <td class="py-3 px-3 font-mono text-xs">${item.progress}%</td>
-          <td class="py-3 px-4 text-slate-400 text-xs">${item.notes}</td>
+    function renderModelTasksTable(sheetIndex, targetId) {
+      const data = sheetIndex === 3 ? appData.sheet3 : appData.sheet4;
+      const tbody = document.getElementById(targetId);
+      if (!data || data.length === 0) { tbody.innerHTML = ''; return; }
+      tbody.innerHTML = data.map(item => `
+        <tr class="hover:bg-slate-800/50 transition border-b border-slate-800/50">
+          <td class="py-3 px-3 text-center font-mono text-slate-500">${item.id}</td>
+          <td class="py-3 px-4 font-semibold text-white">${item.title}</td>
+          <td class="py-3 px-3 text-indigo-300">${item.type}</td>
+          <td class="py-3 px-3 text-center"><span class="px-3 py-1 rounded-full text-[10px] bg-slate-800 text-slate-300">${item.status}</span></td>
+          <td class="py-3 px-3 font-mono text-slate-300">${item.progress}%</td>
+          <td class="py-3 px-4 text-slate-400">${item.notes}</td>
         </tr>
       `).join('');
     }
 
-    function renderEvalStatsTable() {
-      const tbody = document.getElementById('evalStatsBody');
-      const stats = appData.sheet3_stats || [];
-      if (stats.length === 0) return;
+    function renderEvalStatsTable(sheetIndex, targetId) {
+      const data = sheetIndex === 5 ? appData.sheet5 : appData.sheet6;
+      const tbody = document.getElementById(targetId);
+      if (!data || data.length === 0) { tbody.innerHTML = ''; return; }
 
-      // ค้นหาค่า OA สูงสุดจากทุกโมเดล
-      let maxOaNum = -1;
-      stats.forEach(row => {
-        if (row.oaNum > maxOaNum) maxOaNum = row.oaNum;
-      });
-
-      tbody.innerHTML = stats.map(row => {
+      let maxOaNum = Math.max(...data.map(r => r.oaNum));
+      tbody.innerHTML = data.map(row => {
         const isBest = (row.oaNum === maxOaNum && maxOaNum > 0);
-        const rowClass = isBest ? 'best-model-row text-emerald-300 text-sm font-bold shadow-lg' : 'hover:bg-slate-800/40 transition font-mono text-xs';
-        const bestBadge = isBest ? ' <span class="ml-2 px-2 py-0.5 rounded text-[10px] bg-emerald-500 text-slate-950 font-bold uppercase tracking-wider">⭐ Best Model</span>' : '';
-
+        const rowClass = isBest ? 'best-model-row text-emerald-300 font-bold shadow border-b border-slate-800/50' : 'hover:bg-slate-800/40 text-slate-300 transition border-b border-slate-800/50';
+        const bestBadge = isBest ? ' <span class="ml-2 px-1.5 py-0.5 rounded text-[10px] bg-emerald-500 text-slate-950 font-bold">BEST</span>' : '';
         return `
           <tr class="${rowClass}">
-            <td class="py-3 px-4 font-sans text-xs">${row.model}${bestBadge}</td>
-            <td class="py-3 px-3 text-center ${isBest ? 'text-emerald-400 text-base font-black' : ''}">${row.oa}</td>
-            <td class="py-3 px-3 text-center">${row.kappa}</td>
-            <td class="py-3 px-3 text-center">${row.f1}</td>
-            <td class="py-3 px-3 text-center">${row.precision}</td>
-            <td class="py-3 px-3 text-center">${row.recall}</td>
-            <td class="py-3 px-3 text-center">${row.time} hs.</td>
+            <td class="py-3 px-4 font-sans">${row.model}${bestBadge}</td>
+            <td class="py-3 px-2 text-center ${isBest ? 'text-emerald-400 text-[13px] font-black' : ''}">${typeof row.oa === 'string' && row.oa.includes('%') ? row.oa : row.oaNum.toFixed(2)+'%'}</td>
+            <td class="py-3 px-2 text-center">${row.kappa.toFixed(4)}</td>
+            <td class="py-3 px-2 text-center">${row.f1Num.toFixed(2)}%</td>
+            <td class="py-3 px-2 text-center">${row.precision.toFixed(2)}%</td>
+            <td class="py-3 px-2 text-center">${row.recall.toFixed(2)}%</td>
+            <td class="py-3 px-2 text-center">${row.time} hs.</td>
           </tr>
         `;
       }).join('');
+    }
+
+    function renderComparisonTable() {
+      const tbody = document.getElementById('comparisonTableBody');
+      if (!appData.sheet7 || appData.sheet7.length === 0) { tbody.innerHTML=''; return; }
+
+      const maxAcc = Math.max(...appData.sheet7.map(r => Math.max(r.acc6, r.acc13)));
+
+      tbody.innerHTML = appData.sheet7.map(r => {
+        const formatDelta = (val) => val > 0 ? `+${val.toFixed(2)}` : val.toFixed(2);
+        const colorClass = (val) => val > 0 ? 'text-emerald-400' : (val < 0 ? 'text-rose-400' : 'text-slate-400');
+        
+        const isBest = (r.acc6 === maxAcc || r.acc13 === maxAcc) && maxAcc > 0;
+        const rowClass = isBest ? 'best-model-row text-emerald-300 font-bold shadow border-b border-slate-800/50' : 'hover:bg-slate-800/40 transition border-b border-slate-800/50';
+        const bestBadge = isBest ? ' <span class="ml-2 px-1.5 py-0.5 rounded text-[10px] bg-emerald-500 text-slate-950 font-bold">BEST</span>' : '';
+
+        return `
+        <tr class="${rowClass}">
+            <td class="py-2.5 px-3 font-sans font-semibold ${isBest ? 'text-emerald-300' : 'text-white'}">${r.model}${bestBadge}</td>
+            <td class="py-2.5 px-2 text-center border-l border-slate-800/50 ${r.acc6 === maxAcc ? 'text-emerald-400 font-black' : ''}">${r.acc6.toFixed(2)}%</td>
+            <td class="py-2.5 px-2 text-center ${r.acc13 === maxAcc ? 'text-emerald-400 font-black' : ''}">${r.acc13.toFixed(2)}%</td>
+            <td class="py-2.5 px-2 text-center font-bold ${colorClass(r.accDelta)}">${formatDelta(r.accDelta)}%</td>
+            <td class="py-2.5 px-2 text-center border-l border-slate-800/50">${r.f1_6.toFixed(2)}%</td>
+            <td class="py-2.5 px-2 text-center">${r.f1_13.toFixed(2)}%</td>
+            <td class="py-2.5 px-2 text-center font-bold ${colorClass(r.f1Delta)}">${formatDelta(r.f1Delta)}%</td>
+        </tr>
+        `;
+      }).join('');
+    }
+
+    function renderComparisonCharts() {
+      if (!appData.sheet7 || appData.sheet7.length === 0) return;
+      const labels = appData.sheet7.map(m => m.model);
+      const acc6 = appData.sheet7.map(m => m.acc6);
+      const acc13 = appData.sheet7.map(m => m.acc13);
+      const f1_6 = appData.sheet7.map(m => m.f1_6);
+      const f1_13 = appData.sheet7.map(m => m.f1_13);
+
+      const maxAcc = Math.max(...acc6, ...acc13);
+      const maxF1 = Math.max(...f1_6, ...f1_13);
+
+      const bgAcc6 = acc6.map(v => v === maxAcc ? 'rgba(251, 191, 36, 1)' : 'rgba(99, 102, 241, 0.9)');
+      const bgAcc13 = acc13.map(v => v === maxAcc ? 'rgba(251, 191, 36, 1)' : 'rgba(16, 185, 129, 0.9)');
+      const bgF1_6 = f1_6.map(v => v === maxF1 ? 'rgba(251, 191, 36, 1)' : 'rgba(168, 85, 247, 0.9)');
+      const bgF1_13 = f1_13.map(v => v === maxF1 ? 'rgba(251, 191, 36, 1)' : 'rgba(245, 158, 11, 0.9)');
+
+      Chart.defaults.color = '#94a3b8'; Chart.defaults.font.family = 'Kanit';
+
+      if(compareAccChartInstance) compareAccChartInstance.destroy();
+      const ctxAcc = document.getElementById('compareAccChart').getContext('2d');
+      compareAccChartInstance = new Chart(ctxAcc, {
+          type: 'bar',
+          data: {
+              labels: labels,
+              datasets: [
+                  { label: '6 Class Dataset', data: acc6, backgroundColor: bgAcc6, borderRadius: 4 },
+                  { label: '13 Class Dataset', data: acc13, backgroundColor: bgAcc13, borderRadius: 4 }
+              ]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#cbd5e1' } }, tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.parsed.y + '%' } } }, scales: { y: { min: 0, max: 100, grid: { color: '#1e293b' } }, x: { grid: { display: false } } } }
+      });
+
+      if(compareF1ChartInstance) compareF1ChartInstance.destroy();
+      const ctxF1 = document.getElementById('compareF1Chart').getContext('2d');
+      compareF1ChartInstance = new Chart(ctxF1, {
+          type: 'bar',
+          data: {
+              labels: labels,
+              datasets: [
+                  { label: '6 Class Dataset', data: f1_6, backgroundColor: bgF1_6, borderRadius: 4 },
+                  { label: '13 Class Dataset', data: f1_13, backgroundColor: bgF1_13, borderRadius: 4 }
+              ]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#cbd5e1' } }, tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.parsed.y + '%' } } }, scales: { y: { min: 0, max: 100, grid: { color: '#1e293b' } }, x: { grid: { display: false } } } }
+      });
     }
 
     function switchTab(tabId) {
@@ -880,43 +868,28 @@
       document.querySelectorAll('nav button').forEach(el => {
         el.classList.remove('tab-btn-active');
         el.classList.add('border-transparent', 'text-slate-400');
+        el.classList.remove('text-amber-400'); 
       });
-
       document.getElementById(`${tabId}-content`).classList.remove('hidden');
       const activeBtn = document.getElementById(`nav-${tabId}`);
-      activeBtn.classList.add('tab-btn-active');
-      activeBtn.classList.remove('border-transparent', 'text-slate-400');
-
-      if (tabId === 'tab2') {
-        setTimeout(() => renderAeltChart(appData.sheet2), 50);
+      if(activeBtn) {
+          activeBtn.classList.add('tab-btn-active');
+          activeBtn.classList.remove('border-transparent', 'text-slate-400');
+          if (tabId === 'tab7') activeBtn.classList.add('text-amber-400'); 
       }
-    }
-
-    function updateSyncStatusUI(success, msg) {
-      document.getElementById('lastSyncTimeText').innerText = new Date().toLocaleTimeString('th-TH');
-      document.getElementById('liveStatusDot').className = success ? 'w-2.5 h-2.5 rounded-full bg-emerald-400 badge-pulse mr-2' : 'w-2.5 h-2.5 rounded-full bg-rose-500 mr-2';
-      document.getElementById('liveStatusText').innerText = msg;
-    }
-
-    function showToast(msg) {
-      const box = document.getElementById('toastBox');
-      document.getElementById('toastMsg').innerText = msg;
-      box.classList.remove('hidden');
-      setTimeout(() => box.classList.add('hidden'), 3500);
+      if (tabId === 'tab2') setTimeout(() => renderAeltSection(), 50);
+      if (tabId === 'tab7') setTimeout(() => renderComparisonCharts(), 50);
     }
 
     function startAutoSyncTimer() {
       if (countdownTimer) clearInterval(countdownTimer);
       if (syncTimer) clearInterval(syncTimer);
-
       nextCountdown = 60;
       countdownTimer = setInterval(() => {
         nextCountdown--;
         if (nextCountdown < 0) nextCountdown = 60;
-        const cdEl = document.getElementById('countdownText');
-        if (cdEl) cdEl.innerText = `${nextCountdown}s`;
+        document.getElementById('countdownText').innerText = `${nextCountdown}s`;
       }, 1000);
-
       syncTimer = setInterval(() => triggerLiveSync(false), 60000);
     }
 
